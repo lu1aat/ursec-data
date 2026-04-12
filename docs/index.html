@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URSEC · Datos Públicos</title>
+<meta name="description" content="Índice navegable de datos públicos de la Unidad Reguladora de Servicios de Comunicaciones de Uruguay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --brand:         #1B4F8A;
+  --brand-dark:    #133A6B;
+  --brand-mid:     #2563EB;
+  --brand-light:   #EFF6FF;
+  --brand-border:  #BFDBFE;
+  --accent:        #2563EB;
+  --accent-hover:  #1D4ED8;
+  --bg:            #F1F5F9;
+  --surface:       #FFFFFF;
+  --surface2:      #F8FAFC;
+  --border:        #E2E8F0;
+  --border-mid:    #CBD5E1;
+  --text:          #0F172A;
+  --text-muted:    #475569;
+  --text-subtle:   #94A3B8;
+  --mark-bg:       #FEF08A;
+  --mark-text:     #713F12;
+  --pdf:           #DC2626;
+  --xlsx:          #16A34A;
+  --ods:           #2563EB;
+  --docx:          #7C3AED;
+  --radius:        6px;
+  --sidebar-w:     264px;
+  --header-h:      60px;
+  --transition:    140ms ease;
+}
+
+html, body {
+  height: 100%; overflow: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px; color: var(--text); background: var(--bg);
+  line-height: 1.5; -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-subtle); }
+
+/* ── Header ──────────────────────────────────────────────────────── */
+#header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--header-h);
+  background: var(--brand);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: flex; align-items: center; padding: 0 20px; gap: 18px;
+}
+.logo-badge {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  border-radius: var(--radius); padding: 5px 10px;
+  font-size: 12px; font-weight: 700; color: #fff;
+  letter-spacing: 0.08em; text-transform: uppercase; flex-shrink: 0;
+}
+.header-text { flex-shrink: 0; }
+.header-title { color: #fff; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.header-sub { color: rgba(255,255,255,0.6); font-size: 11px; margin-top: 1px; }
+.header-div { width: 1px; height: 26px; background: rgba(255,255,255,0.2); flex-shrink: 0; }
+.header-stats { display: flex; gap: 20px; }
+.hstat { color: rgba(255,255,255,0.7); font-size: 12px; display: flex; align-items: baseline; gap: 5px; }
+.hstat strong { color: #fff; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.gen-at { font-size: 11px; color: rgba(255,255,255,0.45); }
+.ursec-link {
+  font-size: 11px; color: rgba(255,255,255,0.7); text-decoration: none;
+  padding: 5px 11px; border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius);
+  transition: all var(--transition); white-space: nowrap;
+}
+.ursec-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.1); }
+
+/* ── Layout ───────────────────────────────────────────────────────── */
+#layout { display: flex; height: 100vh; padding-top: var(--header-h); }
+
+/* ── Sidebar ──────────────────────────────────────────────────────── */
+#sidebar {
+  width: var(--sidebar-w); min-width: var(--sidebar-w);
+  height: 100%; background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+#sidebar-body {
+  flex: 1; overflow-y: auto; padding: 14px 12px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.filter-section {}
+.filter-label {
+  display: block; font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-subtle); margin-bottom: 7px; padding: 0 2px;
+}
+/* search */
+.search-wrap { position: relative; }
+.search-wrap svg {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  color: var(--text-subtle); pointer-events: none; width: 14px; height: 14px;
+}
+#search-input {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border-mid);
+  border-radius: var(--radius); color: var(--text);
+  padding: 8px 30px 8px 33px; font-size: 13px; font-family: inherit; outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+#search-input::placeholder { color: var(--text-subtle); }
+#search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+#search-clear {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--text-subtle);
+  cursor: pointer; padding: 2px; display: none; line-height: 1; font-size: 13px;
+  transition: color var(--transition);
+}
+#search-clear:hover { color: var(--text); }
+#search-clear.visible { display: block; }
+/* ext */
+.ext-row { display: flex; gap: 4px; flex-wrap: wrap; }
+.ext-btn {
+  flex: 1; min-width: 40px; padding: 5px 4px; border-radius: var(--radius);
+  border: 1px solid var(--border-mid); background: var(--surface2); color: var(--text-muted);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  cursor: pointer; transition: all var(--transition); text-align: center; font-family: inherit;
+}
+.ext-btn:hover { color: var(--text); background: var(--surface); }
+.ext-btn.active[data-ext="pdf"]  { border-color: var(--pdf);  color: var(--pdf);  background: #FEF2F2; }
+.ext-btn.active[data-ext="xlsx"] { border-color: var(--xlsx); color: var(--xlsx); background: #F0FDF4; }
+.ext-btn.active[data-ext="ods"]  { border-color: var(--ods);  color: var(--ods);  background: #EFF6FF; }
+.ext-btn.active[data-ext="docx"] { border-color: var(--docx); color: var(--docx); background: #F5F3FF; }
+/* source */
+.source-row { display: flex; gap: 4px; }
+.src-btn {
+  flex: 1; padding: 6px 4px; border-radius: var(--radius);
+  border: 1px solid var(--border-mid); background: var(--surface2); color: var(--text-muted);
+  font-size: 11px; font-weight: 500; cursor: pointer; text-align: center;
+  transition: all var(--transition); font-family: inherit;
+}
+.src-btn:hover { color: var(--text); }
+.src-btn.active { border-color: var(--accent); color: var(--accent); background: var(--brand-light); font-weight: 600; }
+/* categories */
+#cat-list { display: flex; flex-direction: column; gap: 1px; max-height: 260px; overflow-y: auto; }
+.cat-item {
+  display: flex; align-items: center; gap: 8px; padding: 5px 7px;
+  border-radius: var(--radius); cursor: pointer; transition: background var(--transition); user-select: none;
+}
+.cat-item:hover { background: var(--surface2); }
+.cat-item.active { background: var(--brand-light); }
+.cat-check {
+  width: 14px; height: 14px; border: 1.5px solid var(--border-mid); border-radius: 3px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 9px; transition: all var(--transition);
+}
+.cat-item.active .cat-check { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cat-name { font-size: 12px; color: var(--text-muted); flex: 1; line-height: 1.3; transition: color var(--transition); }
+.cat-item.active .cat-name { color: var(--accent); font-weight: 500; }
+.cat-count { font-size: 10px; color: var(--text-subtle); font-variant-numeric: tabular-nums; }
+/* sidebar footer */
+#sidebar-footer { padding: 10px 12px; border-top: 1px solid var(--border); flex-shrink: 0; }
+#clear-filters {
+  width: 100%; padding: 7px; background: none; border: 1px solid var(--border-mid);
+  border-radius: var(--radius); color: var(--text-muted); font-size: 12px;
+  cursor: pointer; transition: all var(--transition); font-family: inherit;
+}
+#clear-filters:hover { border-color: var(--accent); color: var(--accent); background: var(--brand-light); }
+
+/* ── Main ─────────────────────────────────────────────────────────── */
+#main { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+/* topbar */
+#topbar {
+  height: 44px; flex-shrink: 0; border-bottom: 1px solid var(--border);
+  background: var(--surface); display: flex; align-items: center; padding: 0 16px; gap: 10px;
+}
+#result-count { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+#result-count strong { color: var(--accent); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tb-sep { width: 1px; height: 16px; background: var(--border); flex-shrink: 0; }
+#active-filters-bar { display: flex; gap: 4px; flex: 1; overflow: hidden; align-items: center; min-width: 0; }
+.active-filter-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px 2px 7px;
+  background: var(--brand-light); border: 1px solid var(--brand-border);
+  border-radius: 20px; font-size: 11px; color: var(--accent);
+  white-space: nowrap; cursor: pointer; transition: all var(--transition); font-weight: 500;
+}
+.active-filter-pill:hover { background: #DBEAFE; }
+.active-filter-pill .pill-x { opacity: 0.6; font-size: 11px; }
+.sort-group { display: flex; gap: 4px; align-items: center; margin-left: auto; flex-shrink: 0; }
+.sort-lbl { font-size: 10px; color: var(--text-subtle); text-transform: uppercase; letter-spacing: 0.06em; }
+.sort-btn {
+  padding: 4px 9px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text-muted); font-size: 11px;
+  cursor: pointer; font-family: inherit; transition: all var(--transition);
+}
+.sort-btn:hover { border-color: var(--border-mid); color: var(--text); }
+.sort-btn.active { background: var(--brand-light); border-color: var(--brand-border); color: var(--accent); font-weight: 600; }
+#sort-dir {
+  padding: 4px 8px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text-muted); font-size: 12px;
+  cursor: pointer; font-family: inherit; transition: all var(--transition);
+}
+#sort-dir:hover { color: var(--text); border-color: var(--border-mid); }
+#chart-toggle-btn {
+  padding: 4px 10px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text-muted); font-size: 11px;
+  cursor: pointer; font-family: inherit; transition: all var(--transition); white-space: nowrap;
+}
+#chart-toggle-btn:hover { border-color: var(--border-mid); color: var(--text); }
+#chart-toggle-btn.active { background: var(--brand-light); border-color: var(--brand-border); color: var(--accent); }
+
+/* ── Chart ────────────────────────────────────────────────────────── */
+#chart-panel {
+  border-bottom: 1px solid var(--border); background: var(--surface);
+  flex-shrink: 0; overflow: hidden;
+  max-height: 0; transition: max-height 320ms cubic-bezier(0.4,0,0.2,1);
+}
+#chart-panel.open { max-height: 260px; }
+#chart-inner { padding: 12px 16px 10px; display: flex; flex-direction: column; gap: 8px; }
+.chart-toolbar { display: flex; gap: 4px; align-items: center; }
+.chart-tb-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-subtle); margin-right: 4px; }
+.chart-mode-btn {
+  padding: 3px 10px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text-muted); font-size: 11px;
+  cursor: pointer; font-family: inherit; transition: all var(--transition);
+}
+.chart-mode-btn:hover { border-color: var(--border-mid); color: var(--text); }
+.chart-mode-btn.active { background: var(--brand-light); border-color: var(--brand-border); color: var(--accent); font-weight: 600; }
+#chart-svg-wrap { overflow-x: auto; overflow-y: hidden; }
+#chart-svg { display: block; }
+.act-cell:hover { opacity: 0.75 !important; cursor: default; }
+
+/* ── Table ────────────────────────────────────────────────────────── */
+#table-wrap { flex: 1; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--surface2); border-bottom: 2px solid var(--border-mid);
+}
+th {
+  padding: 10px 12px; text-align: left;
+  font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-muted); white-space: nowrap; user-select: none;
+}
+th:first-child { padding-left: 16px; }
+th:last-child { padding-right: 16px; }
+tbody tr { border-bottom: 1px solid var(--border); transition: background var(--transition); }
+tbody tr:hover { background: #F5F8FF; }
+tbody tr:last-child { border-bottom: none; }
+td { padding: 10px 12px; vertical-align: middle; }
+td:first-child { padding-left: 16px; }
+td:last-child { padding-right: 16px; }
+.td-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.td-ext { width: 54px; }
+.ext-badge {
+  display: inline-block; padding: 2px 6px; border-radius: 4px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.ext-pdf  { background: #FEF2F2; color: var(--pdf);  border: 1px solid #FECACA; }
+.ext-xlsx { background: #F0FDF4; color: var(--xlsx); border: 1px solid #BBF7D0; }
+.ext-ods  { background: #EFF6FF; color: var(--ods);  border: 1px solid #BFDBFE; }
+.ext-docx { background: #F5F3FF; color: var(--docx); border: 1px solid #DDD6FE; }
+.ext-other{ background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+.td-cat { min-width: 110px; max-width: 170px; }
+.cat-badge { display: inline-block; max-width: 100%; font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.td-title { min-width: 200px; }
+.row-title { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
+.row-filename { font-size: 11px; color: var(--text-subtle); margin-top: 2px; }
+.td-size { font-size: 12px; color: var(--text-muted); white-space: nowrap; font-variant-numeric: tabular-nums; text-align: right; }
+.td-src { white-space: nowrap; }
+.src-badge {
+  display: inline-block; padding: 2px 7px; border-radius: 20px;
+  font-size: 10px; font-weight: 500; background: var(--surface2);
+  border: 1px solid var(--border); color: var(--text-subtle);
+}
+.td-actions { width: 46px; }
+.dl-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  background: var(--brand-light); border: 1px solid var(--brand-border);
+  border-radius: var(--radius); color: var(--accent); text-decoration: none;
+  transition: all var(--transition);
+}
+.dl-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; border-radius: 2px; }
+/* empty state */
+#empty { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; color: var(--text-muted); text-align: center; gap: 10px; }
+#empty.show { display: flex; }
+#empty .empty-icon { font-size: 36px; opacity: 0.3; }
+#empty p { font-size: 14px; }
+#empty small { font-size: 12px; color: var(--text-subtle); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+  <div class="logo-badge">URSEC</div>
+  <div class="header-text">
+    <div class="header-title">Datos Públicos</div>
+    <div class="header-sub">Unidad Reguladora de Servicios de Comunicaciones · Uruguay</div>
+  </div>
+  <div class="header-div"></div>
+  <div class="header-stats">
+    <div class="hstat"><strong id="stat-total">0</strong> documentos</div>
+    <div class="hstat"><strong id="stat-cats">0</strong> categorías</div>
+  </div>
+  <div class="header-right">
+    <span class="gen-at">Actualizado: 2026-04-11 22:42</span>
+    <a class="ursec-link" href="https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/datos-y-estadisticas/datos" target="_blank" rel="noopener">↗ Fuente</a>
+  </div>
+</header>
+
+<!-- Layout -->
+<div id="layout">
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div id="sidebar-body">
+
+      <div class="filter-section">
+        <label class="filter-label" for="search-input">Buscar</label>
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input id="search-input" type="search" placeholder="Título, archivo…" autocomplete="off" spellcheck="false">
+          <button id="search-clear" aria-label="Limpiar">✕</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <span class="filter-label">Formato</span>
+        <div class="ext-row">
+          <button class="ext-btn" data-ext="pdf">PDF</button>
+          <button class="ext-btn" data-ext="xlsx">XLSX</button>
+          <button class="ext-btn" data-ext="ods">ODS</button>
+          <button class="ext-btn" data-ext="docx">DOCX</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <span class="filter-label">Fuente</span>
+        <div class="source-row">
+          <button class="src-btn active" data-src="">Todas</button>
+          <button class="src-btn" data-src="datos">Datos</button>
+          <button class="src-btn" data-src="telecom">Telecom</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <span class="filter-label">Categoría</span>
+        <div id="cat-list"></div>
+      </div>
+
+    </div>
+    <div id="sidebar-footer">
+      <button id="clear-filters">Limpiar filtros</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main id="main">
+
+    <div id="topbar">
+      <span id="result-count">Mostrando <strong id="count-shown">0</strong> de <span id="count-total">0</span></span>
+      <div class="tb-sep"></div>
+      <div id="active-filters-bar"></div>
+      <div class="sort-group">
+        <span class="sort-lbl">Orden:</span>
+        <button class="sort-btn active" data-sort="date">Fecha</button>
+        <button class="sort-btn" data-sort="title">Título</button>
+        <button class="sort-btn" data-sort="size">Tamaño</button>
+        <button id="sort-dir">↓</button>
+        <div class="tb-sep"></div>
+        <button id="chart-toggle-btn">▲ Gráfico</button>
+      </div>
+    </div>
+
+    <div id="chart-panel">
+      <div id="chart-inner">
+        <div class="chart-toolbar">
+          <span class="chart-tb-lbl">Vista:</span>
+          <button class="chart-mode-btn active" data-mode="year">Por año</button>
+          <button class="chart-mode-btn" data-mode="month">Por mes</button>
+          <button class="chart-mode-btn" data-mode="category">Por categoría</button>
+          <button class="chart-mode-btn" data-mode="activity">Actividad</button>
+        </div>
+        <div id="chart-svg-wrap"><svg id="chart-svg"></svg></div>
+      </div>
+    </div>
+
+    <div id="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Fmt</th>
+            <th>Categoría</th>
+            <th>Documento</th>
+            <th style="text-align:right">Tamaño</th>
+            <th>Fuente</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div id="empty">
+        <div class="empty-icon">📂</div>
+        <p>No se encontraron documentos</p>
+        <small>Ajustá los filtros o la búsqueda</small>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+window.__DATA__ = [{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-03/Registro%20de%20solicitudes%20de%20bloqueos%20al%2002%20de%20marzo%20de%202026.xlsx","title":"Registro de solicitudes de bloqueo electrónico temporal a proveedores de internet (ISP)","filename":"Registro de solicitudes de bloqueos al 02 de marzo de 2026.xlsx","date_published":"2026-03-02","category":"","size_str":"43.06 KB","size_bytes":44093,"ext":"xlsx","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-01/TARIFARIO%202026_0.pdf","title":"Tasas y Tarifas 2026 establecidas en moneda nacional de los servicios administrados por URSEC","filename":"TARIFARIO 2026_0.pdf","date_published":"2026-01-30","category":"Tasas y tarifas","size_str":"692.57 KB","size_bytes":709191,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Listado%20Aeronaves%20Octubre%202025.pdf","title":"Estaciones a bordo de aeronaves Pdf","filename":"Listado Aeronaves Octubre 2025.pdf","date_published":"2025-10-24","category":"Servicio móvil aeronáutico","size_str":"187.81 KB","size_bytes":192317,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Listado%20Aeronaves%20Octubre%202025.ods","title":"Estaciones a bordo de aeronaves ods","filename":"Listado Aeronaves Octubre 2025.ods","date_published":"2025-10-24","category":"Servicio móvil aeronáutico","size_str":"24.66 KB","size_bytes":25251,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Embarcaciones%20Vigentes%20Octubre%202025.pdf","title":"Estaciones a bordo de embarcaciones Pdf","filename":"Embarcaciones Vigentes Octubre 2025.pdf","date_published":"2025-10-24","category":"Móvil marítimo","size_str":"264.15 KB","size_bytes":270489,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Embarcaciones%20Vigentes%20Octubre%202025.ods","title":"Estaciones a bordo de embarcaciones Ods","filename":"Embarcaciones Vigentes Octubre 2025.ods","date_published":"2025-10-24","category":"Móvil marítimo","size_str":"24.43 KB","size_bytes":25016,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20Distintivo%20Especial%20Octubre%202025.pdf","title":"Listado de Distintivos Especiales asignados a Radioaficionados en pdf","filename":"Nomina Distintivo Especial Octubre 2025.pdf","date_published":"2025-10-16","category":"Radioaficionados","size_str":"220.26 KB","size_bytes":225546,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20Distintivo%20Especial%20Octubre%202025.ods","title":"Listado de Distintivos Especiales asignados a Radioaficionados en ods","filename":"Nomina Distintivo Especial Octubre 2025.ods","date_published":"2025-10-16","category":"Radioaficionados","size_str":"20.49 KB","size_bytes":20981,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20RCH%20Octubre%202025.pdf","title":"Datos de contacto de Radio Clubes Habilitados en pdf","filename":"Nomina RCH Octubre 2025.pdf","date_published":"2025-10-16","category":"","size_str":"259.15 KB","size_bytes":265369,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20RCH%20Octubre%202025.ods","title":"Datos de contacto de Radio Clubes Habilitados en ods","filename":"Nomina RCH Octubre 2025.ods","date_published":"2025-10-16","category":"","size_str":"26.47 KB","size_bytes":27105,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20CX%20Vigentes%20Octubre%202025.pdf","title":"Registro de radioaficionados a octubre de 2025 en pdf","filename":"Nomina CX Vigentes Octubre 2025.pdf","date_published":"2025-10-16","category":"Radioaficionados","size_str":"905 KB","size_bytes":926720,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20CX%20Vigentes%20Octubre%202025.ods","title":"Registro de radioaficionados a octubre de 2025 en ods","filename":"Nomina CX Vigentes Octubre 2025.ods","date_published":"2025-10-16","category":"Radioaficionados","size_str":"56.83 KB","size_bytes":58193,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20Vigentes%20Radio%20operadores%20Octubre%202025.pdf","title":"Certificados de operadores de móvil aeronáutico y móvil marítimo pdf","filename":"Nomina Vigentes Radio operadores Octubre 2025.pdf","date_published":"2025-10-16","category":"Radiocomunicaciones","size_str":"228.22 KB","size_bytes":233697,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Nomina%20Vigentes%20Radio%20operadores%20Octubre%202025.ods","title":"Certificados de operadores de móvil aeronáutico y móvil marítimo pdf","filename":"Nomina Vigentes Radio operadores Octubre 2025.ods","date_published":"2025-10-16","category":"Radiocomunicaciones","size_str":"18.63 KB","size_bytes":19077,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Vigentes%20CVC%20Octubre%202025.pdf","title":"Listado de estaciones de banda ciudadana pdf","filename":"Vigentes CVC Octubre 2025.pdf","date_published":"2025-10-16","category":"Banda ciudadana","size_str":"202.57 KB","size_bytes":207431,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-10/Vigentes%20CVC%20Octubre%202025.ods","title":"Listado de estaciones de banda ciudadana ods","filename":"Vigentes CVC Octubre 2025.ods","date_published":"2025-10-16","category":"Banda ciudadana","size_str":"20.19 KB","size_bytes":20674,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-07/IMT%20SAE.pdf","title":"Frecuencias IMT","filename":"IMT SAE.pdf","date_published":"2025-07-14","category":"Telecomunicaciones móviles","size_str":"98.79 KB","size_bytes":101160,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-08/Nomina%20Sat%C3%A9lites%20junio%202025.pdf","title":"NÓMINA DE PERMISOS ANUALES DE SATÉLITES GEOESTACIONARIOS PDF","filename":"Nomina Satélites junio 2025.pdf","date_published":"2025-06-30","category":"Satélites comerciales","size_str":"67.99 KB","size_bytes":69621,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-08/Nomina%20Sat%C3%A9lites%20junio%202025.ods","title":"NÓMINA DE PERMISOS ANUALES DE SATÉLITES GEOESTACIONARIOS ODS","filename":"Nomina Satélites junio 2025.ods","date_published":"2025-06-30","category":"Satélites comerciales","size_str":"17.62 KB","size_bytes":18042,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2024-10/ANONIMIZADO_ACCESO_INTERNET_2024_09.pdf","title":"Acceso a Internet (alámbrico): análisis de la evolución del mercado uruguayo datos a septiembre de 2024","filename":"ANONIMIZADO_ACCESO_INTERNET_2024_09.pdf","date_published":"2024-10-03","category":"Informes","size_str":"768.13 KB","size_bytes":786565,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2024-09/Titularidad%20de%20medios%20al%2015%2005%202024.xlsx","title":"Titularidad de medios al 15 05 2024","filename":"Titularidad de medios al 15 05 2024.xlsx","date_published":"2024-05-15","category":"Radiodifusión y TV Abonados","size_str":"102.55 KB","size_bytes":105011,"ext":"xlsx","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2023-06/Tabla_de%20Radiodifusi%C3%B3n%20y%20TV%20Abonados%20al%2016%20de%20junio%20de%202023.xlsx","title":"Emisoras de Radiodifusión y TV Abonados al 16_06_2023","filename":"Tabla_de Radiodifusión y TV Abonados al 16 de junio de 2023.xlsx","date_published":"2023-06-16","category":"Radiodifusión y TV Abonados","size_str":"67.63 KB","size_bytes":69253,"ext":"xlsx","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-11/Visanet-Fiserv%20WEB.pdf","title":"Convenio de interconexión entre Compañía Uruguaya de Medios de Procesamiento S.A y First Data Uruguay Srl","filename":"Visanet-Fiserv WEB.pdf","date_published":"2022-11-17","category":"Convenio operadores de pago","size_str":"1.05 MB","size_bytes":1101004,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-11/Scotiabank%20-%20Fiserv%20WEB.pdf","title":"Convenio de interconexión entre Scotiabank Uruguay S.A y Firstdata","filename":"Scotiabank - Fiserv WEB.pdf","date_published":"2022-11-15","category":"Convenio operadores de pago","size_str":"1.93 MB","size_bytes":2023751,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-11/Getnet-Fiserv%20WEB.pdf","title":"Acuerdo de interconexión entre Getnet y Fiserv","filename":"Getnet-Fiserv WEB.pdf","date_published":"2022-10-17","category":"Convenio operadores de pago","size_str":"5.04 MB","size_bytes":5284823,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-10/OCA-FISERV%20WEB.pdf","title":"Convenio de interconexión entre OCA. S.A y FIRST DATA URUGUAY SRL","filename":"OCA-FISERV WEB.pdf","date_published":"2022-10-13","category":"Convenio operadores de pago","size_str":"1.34 MB","size_bytes":1405091,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-10/PassCard-FData%20WEB.pdf","title":"Convenio de interconexión entre PassCard S.A. y First Data Uruguay S.R.L.","filename":"PassCard-FData WEB.pdf","date_published":"2022-10-07","category":"Convenio operadores de pago","size_str":"4.61 MB","size_bytes":4833935,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-10/Convenio%20Socur-Fiserv%20WEB.pdf","title":"Convenio de interconexión entre First Data Uruguay S.A. y Socur S.A","filename":"Convenio Socur-Fiserv WEB.pdf","date_published":"2022-10-03","category":"Acuerdo de operadores de pago","size_str":"1.04 MB","size_bytes":1090519,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2020-12/Visanet_Geocom%20-WEB.pdf","title":"Visanet_Geocom","filename":"Visanet_Geocom -WEB.pdf","date_published":"2022-08-30","category":"Convenios operadores de pago","size_str":"2.93 MB","size_bytes":3072327,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-08/Adenda.pdf","title":"Adenda al convenio","filename":"Adenda.pdf","date_published":"2022-08-30","category":"Convenios operadores de pago","size_str":"779.35 KB","size_bytes":798054,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/Socur-Visanet%20WEB.pdf","title":"Convenio SOCUR S.A - VISANET","filename":"Socur-Visanet WEB.pdf","date_published":"2022-03-22","category":"Convenio operadores de pago","size_str":"1.82 MB","size_bytes":1908408,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/Visanet-Sarea%20WEB.pdf","title":"Convenio SAREA - VISA","filename":"Visanet-Sarea WEB.pdf","date_published":"2022-03-10","category":"Convenio operadores de pago","size_str":"1.09 MB","size_bytes":1142947,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/Visanet-OCA%20WEB.pdf","title":"Convenio VISANET - OCA S.A","filename":"Visanet-OCA WEB.pdf","date_published":"2022-01-25","category":"Convenio operadores de pago","size_str":"1.49 MB","size_bytes":1562378,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/OCA-Visanet%20WEB.pdf","title":"Convenio OCA S.A - VISANET","filename":"OCA-Visanet WEB.pdf","date_published":"2022-01-25","category":"Convenio operadores de pago","size_str":"1.5 MB","size_bytes":1572864,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/Cabal-Visanet%20WEB.pdf","title":"Convenio CABAL URUGUAY S.A - COMPAÑÍA URUGUAYA DE MEDIOS DE PROCESAMIENTO S.A","filename":"Cabal-Visanet WEB.pdf","date_published":"2022-01-25","category":"Convenio operadores de pago","size_str":"1.51 MB","size_bytes":1583349,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/Fist%20Data-Visanet%20WEB.pdf","title":"Convenio FIRST DATA SRL - VISANET","filename":"Fist Data-Visanet WEB.pdf","date_published":"2022-01-25","category":"Convenio operadores de pago","size_str":"1.58 MB","size_bytes":1656750,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-01/Cr%C3%A9d.Directos%20-%20First%20Data%20WEB.pdf","title":"Convenio de interconexión entre CRÉDITOS DIRECTOS S.A y FIRST DATA URUGUAY S.A","filename":"Créd.Directos - First Data WEB.pdf","date_published":"2022-01-14","category":"Convenio operadores de pago","size_str":"460.41 KB","size_bytes":471459,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-01/First%20Data-Club%20del%20Este%20WEB.pdf","title":"Convenio de interconexión entre S.A CIA, CLUB DEL ESTE y FIRS DATA URUGUAY S.A","filename":"First Data-Club del Este WEB.pdf","date_published":"2022-01-04","category":"Convenio operadores de pago","size_str":"739.29 KB","size_bytes":757032,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-12/FirstData-Cabal.pdf","title":"Convenio de interconexión entre First Data Uruguay S.R.L. y Cabal Uruguay S.R.L.","filename":"FirstData-Cabal.pdf","date_published":"2021-12-21","category":"Convenio operadores de pago","size_str":"1.19 MB","size_bytes":1247805,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Phoenix%20SA-OCA%20SA%20WEB.pdf","title":"Convenio Phoenix SA -Oca SA WEB","filename":"Phoenix SA-OCA SA WEB.pdf","date_published":"2020-12-07","category":"Convenios operadores de pago","size_str":"536.26 KB","size_bytes":549130,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2020-03/Registro%20Radios%20Tem%C3%A1ticas%20al%2020.03.2020.pdf","title":"Registro de Radios Temáticas al 20.03.2020","filename":"Registro Radios Temáticas al 20.03.2020.pdf","date_published":"2020-03-20","category":"","size_str":"153.25 KB","size_bytes":156928,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-03/DATOS%20TECNICOS%20AM-FM-TV%200001.ods","title":"DATOS TECNICOS AM-FM-TV 0001.ods","filename":"DATOS TECNICOS AM-FM-TV 0001.ods","date_published":"2019-03-15","category":"Radiodifusión","size_str":"57.85 KB","size_bytes":59238,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Phoenix%2BS.A%2Bcon%2BCr%C3%A9ditos%2BDirectos%2BS.A.pdf","title":"Convenio de interconexión entre Phoenix y Créditos Directos","filename":"Phoenix+S.A+con+Créditos+Directos+S.A.pdf","date_published":"2018-12-19","category":"Convenios operadores de pago","size_str":"127.82 KB","size_bytes":130887,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Convenio%20de%20interconexi%C3%B3n%20entre%20Hosting%20y%20Pass%20Card.pdf","title":"Convenio de interconexión entre Hosting y Pass Card","filename":"Convenio de interconexión entre Hosting y Pass Card.pdf","date_published":"2018-12-17","category":"Convenios operadores de pago","size_str":"105.79 KB","size_bytes":108328,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Abitab%2BS.A.Cr%C3%A9ditos%2BDirectos%2BS.A..pdf","title":"Convenio de Interconexión Abitab S.A. - Créditos Directos S.A.","filename":"Abitab+S.A.Créditos+Directos+S.A..pdf","date_published":"2018-12-06","category":"Convenios operadores de pago","size_str":"317.18 KB","size_bytes":324792,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Cabal%2BS.A.%2BAbitab%2BS.A..pdf","title":"Acuerdo de Interconexión Cabal Uruguay S.A. - Abitab S.A.","filename":"Cabal+S.A.+Abitab+S.A..pdf","date_published":"2018-12-06","category":"Convenios operadores de pago","size_str":"400.16 KB","size_bytes":409763,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Acuerdo%20de%20Interconexion%20Cabal%20S.A.%20-%20Phoenix%20S.A.%20accesible.pdf","title":"Acuerdo de Interconexión Cabal Uruguay S.A. - Phoenix S.A.","filename":"Acuerdo de Interconexion Cabal S.A. - Phoenix S.A. accesible.pdf","date_published":"2018-12-06","category":"Convenios operadores de pago","size_str":"394.2 KB","size_bytes":403660,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Acuerdo%20de%20Interconexion%20Cabal%20S.A.%20-%20Phoenix%20S.A..pdf","title":"Acuerdo de Interconexión Cabal Uruguay S.A. - Phoenix S.A.","filename":"Acuerdo de Interconexion Cabal S.A. - Phoenix S.A..pdf","date_published":"2018-12-06","category":"Convenios operadores de pago","size_str":"299.56 KB","size_bytes":306749,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2018-11/Plan%20tecnico%20fundamental%20-%20Plan%20nacional%20de%20se%C3%B1alizacion_1.pdf","title":"Plan tecnico fundamental - Plan nacional de señalizacion.pdf","filename":"Plan tecnico fundamental - Plan nacional de señalizacion_1.pdf","date_published":"2018-11-26","category":"","size_str":"19.68 KB","size_bytes":20152,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2018-11/Plan%20t%C3%A9cnico%20fundamental%20-%20Numeraci%C3%B3n.pdf","title":"Plan Técnico de Numeración","filename":"Plan técnico fundamental - Numeración.pdf","date_published":"2018-11-26","category":"","size_str":"44.47 KB","size_bytes":45537,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2018-11/TVD%2BT%2BUruguay.ods","title":"Listado de canales TVD-Terrestre adjudicados","filename":"TVD+T+Uruguay.ods","date_published":"2018-05-22","category":"TVD-Terrestre","size_str":"6.96 KB","size_bytes":7127,"ext":"ods","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2020-12/Scotiabank%20_Geocom%20-WEB%20%281%29.pdf","title":"Scotiabank_Geocom","filename":"Scotiabank _Geocom -WEB (1).pdf","date_published":"2017-11-20","category":"Convenios operadores de pago","size_str":"362.43 KB","size_bytes":371128,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Visamet_Resonance%20Uruguay%20SA.pdf","title":"Convenio VISANET - RESONANCE URUGUAY S.A.","filename":"Visamet_Resonance Uruguay SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"627.2 KB","size_bytes":642252,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/Visanet-Resonance%20ADENDA.pdf","title":"Adenda del convenio","filename":"Visanet-Resonance ADENDA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"774.68 KB","size_bytes":793272,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Oca_Geocom%20SA.pdf","title":"Acuerdo de interconexión","filename":"Oca_Geocom SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"358.62 KB","size_bytes":367226,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2022-12/_2014-1000957_GEOCOM_Modificaci%C3%B3n_del_acuerdo_de_interconexi%C3%B3n_OCA_firmado_12112021.pdf","title":"Adenda al convenio","filename":"_2014-1000957_GEOCOM_Modificación_del_acuerdo_de_interconexión_OCA_firmado_12112021.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"1.35 MB","size_bytes":1415577,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Abitab_SA%20Creditos%20Directos%20SA.pdf","title":"Abitab_SA Creditos Directos SA.pdf","filename":"Abitab_SA Creditos Directos SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"317.18 KB","size_bytes":324792,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Cabal%20SA_Abitab%20SA_0.pdf","title":"Cabal SA_Abitab SA_0.pdf","filename":"Cabal SA_Abitab SA_0.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"262.68 KB","size_bytes":268984,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Cabal%20SA_Phoenix%20SA.pdf","title":"Cabal SA_Phoenix SA.pdf","filename":"Cabal SA_Phoenix SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"256.65 KB","size_bytes":262809,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Cabal%20Uruguay%20SA_Intermel%20SA.pdf","title":"Cabal Uruguay SA_Intermel SA.pdf","filename":"Cabal Uruguay SA_Intermel SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"200.5 KB","size_bytes":205312,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Cabal%20Uruguay%20SA_Sebatop%20SA.pdf","title":"Cabal Uruguay SA_Sebatop SA.pdf","filename":"Cabal Uruguay SA_Sebatop SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"238.02 KB","size_bytes":243732,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Cabal%20Uruguay_Geocom%20Uruguay%20SA.pdf","title":"Cabal Uruguay_Geocom Uruguay SA.pdf","filename":"Cabal Uruguay_Geocom Uruguay SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"312.35 KB","size_bytes":319846,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Cabal%20Uruguay_RedPos%20Uruguay.pdf","title":"Cabal Uruguay_RedPos Uruguay.pdf","filename":"Cabal Uruguay_RedPos Uruguay.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"184.51 KB","size_bytes":188938,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Creditos%20Directos%20SA_Geocom%20Uruguay%20SA.pdf","title":"Creditos Directos SA_Geocom Uruguay SA.pdf","filename":"Creditos Directos SA_Geocom Uruguay SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"257.13 KB","size_bytes":263301,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/First%20Data%20Uruguay%20SA_Sebatop%20SA.pdf","title":"First Data Uruguay SA_Sebatop SA.pdf","filename":"First Data Uruguay SA_Sebatop SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"238.9 KB","size_bytes":244633,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/First%20Data%20Uruguay%20SA_Resonance%20Uruguay%20SA.pdf","title":"First Data Uruguay SA_Resonance Uruguay SA.pdf","filename":"First Data Uruguay SA_Resonance Uruguay SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"373.25 KB","size_bytes":382208,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/First%20Data%20Uruguay_Geocom%20SA_0.pdf","title":"First Data Uruguay_Geocom SA_0.pdf","filename":"First Data Uruguay_Geocom SA_0.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"219.79 KB","size_bytes":225064,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Redpos%20Galanet%20SA_Anda.pdf","title":"Redpos Galanet SA_Anda.pdf","filename":"Redpos Galanet SA_Anda.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"278.15 KB","size_bytes":284825,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Hosting%20SA_Pass%20Card%20SA_0.pdf","title":"Hosting SA_Pass Card SA_0.pdf","filename":"Hosting SA_Pass Card SA_0.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"315.14 KB","size_bytes":322703,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Geocom_Anda.pdf","title":"Geocom_Anda.pdf","filename":"Geocom_Anda.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"285.83 KB","size_bytes":292689,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Hosting%20SA_Compania%20Club%20del%20Este%20SA_contrato%201.pdf","title":"Hosting SA_Compania Club del Este SA_contrato 1.pdf","filename":"Hosting SA_Compania Club del Este SA_contrato 1.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"133.74 KB","size_bytes":136949,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Hosting%20SA_Compania%20Club%20del%20Este%20SA_contrato%202.pdf","title":"Hosting SA_Compania Club del Este SA_contrato 2.pdf","filename":"Hosting SA_Compania Club del Este SA_contrato 2.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"105.79 KB","size_bytes":108328,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Hosting%20SA_Socur%20SA.pdf","title":"Hosting SA_Socur SA.pdf","filename":"Hosting SA_Socur SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"147.49 KB","size_bytes":151029,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Intermel%20SA_Anda.pdf","title":"Intermel SA_Anda.pdf","filename":"Intermel SA_Anda.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"323.65 KB","size_bytes":331417,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Intermel%20SA_SA%20Cia%20Club%20del%20Este.pdf","title":"Intermel SA_SA Cia Club del Este.pdf","filename":"Intermel SA_SA Cia Club del Este.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"191.59 KB","size_bytes":196188,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Intermel%20SA_Socur%20SA.pdf","title":"Intermel SA_Socur SA.pdf","filename":"Intermel SA_Socur SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"228.01 KB","size_bytes":233482,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Oca%20SA_Resonance%20Uruguay%20SA.pdf","title":"Oca SA_Resonance Uruguay SA.pdf","filename":"Oca SA_Resonance Uruguay SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"360.82 KB","size_bytes":369479,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Oca%20SA_Sebatop%20SA.pdf","title":"Oca SA_Sebatop SA.pdf","filename":"Oca SA_Sebatop SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"235.86 KB","size_bytes":241520,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/OCA_RedPOS.pdf","title":"OCA_RedPOS.pdf","filename":"OCA_RedPOS.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"163.6 KB","size_bytes":167526,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Phoenix%20SA_Creditos%20Directos%20SA.pdf","title":"Phoenix SA_Creditos Directos SA.pdf","filename":"Phoenix SA_Creditos Directos SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"127.82 KB","size_bytes":130887,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Phoenix%20SA_Pass%20Card%20SA.pdf","title":"Phoenix SA_Pass Card SA.pdf","filename":"Phoenix SA_Pass Card SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"120.51 KB","size_bytes":123402,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Phoenix%20SA_Socur%20SA.pdf","title":"Phoenix SA_Socur SA.pdf","filename":"Phoenix SA_Socur SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"112.52 KB","size_bytes":115220,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/POS2000_Creditos%20Directos%20SA_0.pdf","title":"POS2000_Creditos Directos SA_0.pdf","filename":"POS2000_Creditos Directos SA_0.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"295.93 KB","size_bytes":303032,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/POS2000_Scotiabank%20Uruguay%20SA.pdf","title":"POS2000_Scotiabank Uruguay SA.pdf","filename":"POS2000_Scotiabank Uruguay SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"408.27 KB","size_bytes":418068,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Resonance%20Uruguay%20SA_Creditos%20Directos_1.pdf","title":"Resonance Uruguay SA_Creditos Directos_1.pdf","filename":"Resonance Uruguay SA_Creditos Directos_1.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"142.92 KB","size_bytes":146350,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Resonance%20Uruguay%20SA_Pass%20Card%20SA_0.pdf","title":"Resonance Uruguay SA_Pass Card SA_0.pdf","filename":"Resonance Uruguay SA_Pass Card SA_0.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"240.07 KB","size_bytes":245831,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Resonance%20Uruguay%20SA_Scotiabank%20Uruguay_0_0.pdf","title":"Resonance Uruguay SA_Scotiabank Uruguay_0_0.pdf","filename":"Resonance Uruguay SA_Scotiabank Uruguay_0_0.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"209.86 KB","size_bytes":214896,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Resonance%20Uruguay%20SA_Socur%20SA_0.pdf","title":"Resonance Uruguay SA_Socur SA_0.pdf","filename":"Resonance Uruguay SA_Socur SA_0.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"199.75 KB","size_bytes":204544,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Resonance_Anda_contrato%201.pdf","title":"Resonance_Anda_contrato 1.pdf","filename":"Resonance_Anda_contrato 1.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"110.35 KB","size_bytes":112998,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Resonance_Anda%20_contrato%202.pdf","title":"Resonance_Anda _contrato 2.pdf","filename":"Resonance_Anda _contrato 2.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"132.21 KB","size_bytes":135383,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Scotiabank%20SA_Phoenix%20SA.pdf","title":"Scotiabank SA_Phoenix SA.pdf","filename":"Scotiabank SA_Phoenix SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"218.51 KB","size_bytes":223754,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Scotiabank%20Uruguay%20SA_Sebatop%20SA.pdf","title":"Scotiabank Uruguay SA_Sebatop SA.pdf","filename":"Scotiabank Uruguay SA_Sebatop SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"230.79 KB","size_bytes":236328,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Sisteco%20SA_PassCard%20SA.pdf","title":"Sisteco SA_PassCard SA.pdf","filename":"Sisteco SA_PassCard SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"248.48 KB","size_bytes":254443,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Sisteco%20SA_SA%20Cia%20Club%20del%20Este.pdf","title":"Sisteco SA_SA Cia Club del Este.pdf","filename":"Sisteco SA_SA Cia Club del Este.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"192.3 KB","size_bytes":196915,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Sisteco%20SA_Socur%20SA.pdf","title":"Sisteco SA_Socur SA.pdf","filename":"Sisteco SA_Socur SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"261.63 KB","size_bytes":267909,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Visanet_Phoenix.pdf","title":"Visanet_Phoenix.pdf","filename":"Visanet_Phoenix.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"376.08 KB","size_bytes":385105,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Visanet_Sebatop%20SA.pdf","title":"Visanet_Sebatop SA.pdf","filename":"Visanet_Sebatop SA.pdf","date_published":"2017-08-26","category":"Convenios operadores de pago","size_str":"605.51 KB","size_bytes":620042,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2018-11/numeracion_operadores_dic-2016%2B%28002%29.pdf","title":"Numeración asignada por operador","filename":"numeracion_operadores_dic-2016+(002).pdf","date_published":"2016-12-27","category":"","size_str":"132.99 KB","size_bytes":136181,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/First%20Data-Phoenix%20SA-WEB%202014-952.pdf","title":"Convenio de interconexión entre First Data Uruguay S.A. y Phoenix S.A.","filename":"First Data-Phoenix SA-WEB 2014-952.pdf","date_published":"2016-06-13","category":"Convenios operadores de pago","size_str":"2.16 MB","size_bytes":2264924,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2020-06/Convenio_Interconexion_Antel_Wireless.pdf","title":"Convenio de Interconexión Antel - AMWU S.A.","filename":"Convenio_Interconexion_Antel_Wireless.pdf","date_published":"2016-05-23","category":"","size_str":"1.02 MB","size_bytes":1069547,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2021-01/Phoenix%2BS.A-%2BClub%2Bdel%2BEste._0.pdf","title":"Convenio de interconexión entre Phoenix y Club del Este","filename":"Phoenix+S.A-+Club+del+Este._0.pdf","date_published":"2015-06-27","category":"Convenios operadores de pago","size_str":"143.08 KB","size_bytes":146513,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/AMWUyTELEPHONE2.pdf","title":"Convenio de interconexión","filename":"AMWUyTELEPHONE2.pdf","date_published":"2009-12-01","category":"Datos","size_str":"2.65 MB","size_bytes":2778726,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/parte%201.pdf","title":"Anexos","filename":"parte 1.pdf","date_published":"2009-12-01","category":"Datos","size_str":"4.9 MB","size_bytes":5138022,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ANEXO%201_0.pdf","title":"Anexo 1","filename":"ANEXO 1_0.pdf","date_published":"2006-06-30","category":"Datos","size_str":"15.66 KB","size_bytes":16035,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ANEXO%202_0.pdf","title":"Anexo 2","filename":"ANEXO 2_0.pdf","date_published":"2006-06-30","category":"Datos","size_str":"16.15 KB","size_bytes":16537,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Addenda_0.pdf","title":"Addenda_0.pdf","filename":"Addenda_0.pdf","date_published":"2006-06-13","category":"Datos","size_str":"7.88 KB","size_bytes":8069,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Anexo%201.pdf","title":"Anexo 1.pdf","filename":"Anexo 1.pdf","date_published":"2006-06-13","category":"Datos","size_str":"15.54 KB","size_bytes":15912,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Anexo%201_1.pdf","title":"Anexo 1","filename":"Anexo 1_1.pdf","date_published":"2006-02-24","category":"Datos","size_str":"15.66 KB","size_bytes":16035,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Anexo%202_7.pdf","title":"Anexo 2","filename":"Anexo 2_7.pdf","date_published":"2006-02-24","category":"Datos","size_str":"16.15 KB","size_bytes":16537,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Anexo%201_2.pdf","title":"Anexo 1","filename":"Anexo 1_2.pdf","date_published":"2006-02-01","category":"Datos","size_str":"15.66 KB","size_bytes":16035,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ANEXO%202.pdf","title":"ANEXO 2.pdf","filename":"ANEXO 2.pdf","date_published":"2006-02-01","category":"Datos","size_str":"16.15 KB","size_bytes":16537,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ADDENDA_0.pdf","title":"ADDENDA","filename":"ADDENDA_0.pdf","date_published":"2005-01-27","category":"Datos","size_str":"9.03 KB","size_bytes":9246,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ANEXO%201_2.pdf","title":"ANEXO 1","filename":"ANEXO 1_2.pdf","date_published":"2005-01-27","category":"Datos","size_str":"33.07 KB","size_bytes":33863,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ADDENDA.pdf","title":"Addenda","filename":"ADDENDA.pdf","date_published":"2005-01-08","category":"Datos","size_str":"30.18 KB","size_bytes":30904,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ANEXO%201_1.pdf","title":"Anexo 1","filename":"ANEXO 1_1.pdf","date_published":"2005-01-08","category":"Datos","size_str":"15.7 KB","size_bytes":16076,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Addenda%20Convenio%20de%20Interconexion%20Movistar_CTI.pdf","title":"Addenda Convenio de Interconexión Movistar_CTI","filename":"Addenda Convenio de Interconexion Movistar_CTI.pdf","date_published":"2004-12-20","category":"Convenio de interconexión","size_str":"506.31 KB","size_bytes":518461,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Addenda%20MOVISTAR_CLARO%201%20octubre%202010.pdf","title":"Addenda MOVISTAR-CLARO 1 octubre 2010","filename":"Addenda MOVISTAR_CLARO 1 octubre 2010.pdf","date_published":"2004-12-20","category":"Convenio de interconexión","size_str":"381.6 KB","size_bytes":390758,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Addenda_1.pdf","title":"Addenda","filename":"Addenda_1.pdf","date_published":"2004-12-14","category":"Datos","size_str":"17.79 KB","size_bytes":18216,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/ANEXO%201_3.pdf","title":"Anexo 1","filename":"ANEXO 1_3.pdf","date_published":"2004-12-14","category":"Datos","size_str":"57.86 KB","size_bytes":59248,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Convenio%20de%20interconexion.pdf","title":"Convenio de interconexión","filename":"Convenio de interconexion.pdf","date_published":"2003-11-01","category":"Datos","size_str":"1.19 MB","size_bytes":1247805,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2019-06/Addenda%20al%20convenio%20de%20interconexion%20febrero%202007.pdf","title":"Addenda","filename":"Addenda al convenio de interconexion febrero 2007.pdf","date_published":"2003-11-01","category":"Datos","size_str":"298.51 KB","size_bytes":305674,"ext":"pdf","source":"datos"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Bases_del_Concurso_de_Equidad_de_G%C3%A9nero_Ursec_2026.pdf","title":"Bases del Concurso de Equidad de Género URSEC 2026","filename":"Bases_del_Concurso_de_Equidad_de_Género_Ursec_2026.pdf","date_published":"2026-03-24","category":"Instructivo","size_str":"272.93 KB","size_bytes":279480,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/FICHA%20T%C3%89CNICA%20DE%20POSTULACI%C3%93N%20PARA%20EL%20CONCURSO.docx","title":"Ficha técnica de postulación","filename":"FICHA TÉCNICA DE POSTULACIÓN PARA EL CONCURSO.docx","date_published":"2026-03-24","category":"Instructivo","size_str":"45.88 KB","size_bytes":46981,"ext":"docx","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Mejora%20continua%20en%20el%20Departamento%20de%20Administraci%C3%B3n%20de%20Espectro.%20Servicio%20de%20Radioaficionados%20-%20URSEC.pdf","title":"Mejora continua en el Departamento de Administración de Espectro. Servicio de Radioaficionados – C. García y M. Capdevielle","filename":"Mejora continua en el Departamento de Administración de Espectro. Servicio de Radioaficionados - URSEC.pdf","date_published":"2025-11-20","category":"Materiales didácticos","size_str":"332.17 KB","size_bytes":340142,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Calidad%20de%20servicio%20y%20experiencia%20de%20usuario%20en%20servicios%20de%20telecomunicaciones%20-%20URSEC.pdf","title":"Calidad de servicio y experiencia de usuario en servicios de telecomunicaciones – F. Hernández, A. Hill y N. Rodríguez","filename":"Calidad de servicio y experiencia de usuario en servicios de telecomunicaciones - URSEC.pdf","date_published":"2025-11-20","category":"Materiales didácticos","size_str":"1.49 MB","size_bytes":1562378,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-01/Informe%20sobre%20portabilidad%20num%C3%A9rica%20en%20el%20Uruguay%20al%2031%20de%20diciembre%20de%202024.pdf","title":"Informe sobre portabilidad numérica en el Uruguay al 31 de diciembre de 2024","filename":"Informe sobre portabilidad numérica en el Uruguay al 31 de diciembre de 2024.pdf","date_published":"2024-10-25","category":"Información estadística","size_str":"642.55 KB","size_bytes":657971,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2025-01/An%C3%A1lisis%20comparativo%20al%2031%20de%20diciembre%20de%202024.pdf","title":"Análisis comparativo al 31 de diciembre de 2024","filename":"Análisis comparativo al 31 de diciembre de 2024.pdf","date_published":"2024-10-25","category":"Información estadística","size_str":"597.13 KB","size_bytes":611461,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/ESPECTRO%20IMT%20Y%20REDES%20SATELITALES.PDF","title":"Espectro (IMT y redes satelitales)","filename":"ESPECTRO IMT Y REDES SATELITALES.PDF","date_published":"2024-10-17","category":"Materiales didácticos","size_str":"1.04 MB","size_bytes":1090519,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Licencias%20clase%20B.pdf","title":"Nuevas licencias clase B","filename":"Licencias clase B.pdf","date_published":"2024-10-17","category":"Materiales didácticos","size_str":"887.89 KB","size_bytes":909199,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/AGENDA%20DEL%20EVENTO%202024%20%28actualizada%2016.10.2024%29.pdf","title":"Agenda - Jornada Anual de Regulación de Servicios de Comunicaciones 2024","filename":"AGENDA DEL EVENTO 2024 (actualizada 16.10.2024).pdf","date_published":"2024-10-15","category":"Guías","size_str":"1.04 MB","size_bytes":1090519,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2024-01/Resoluci%C3%B3n%20del%20Poder%20Ejecutivo%20Cadena%20Nacional%2027%20de%20enero%20de%202024.pdf","title":"Resolución del Poder Ejecutivo Cadena Nacional 27 de enero de 2024","filename":"Resolución del Poder Ejecutivo Cadena Nacional 27 de enero de 2024.pdf","date_published":"2026-04-11","category":"","size_str":"313.33 KB","size_bytes":320849,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/AGENDA%20DEL%20EVENTO_2.pdf","title":"Agenda - Jornada Anual de Regulación de Servicios de Comunicaciones 2023","filename":"AGENDA DEL EVENTO_2.pdf","date_published":"2023-11-28","category":"Materiales didácticos","size_str":"202.94 KB","size_bytes":207810,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Importancia%20de%20datos%20estad%C3%ADsticos%20telecomunicaciones%20-%20Diego%20Larriera%20%28URSEC%29.pdf","title":"Importancia de los datos estadísticos para la regulación de los mercados de telecomunicaciones","filename":"Importancia de datos estadísticos telecomunicaciones - Diego Larriera (URSEC).pdf","date_published":"2023-11-28","category":"Materiales didácticos","size_str":"2.11 MB","size_bytes":2212495,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Defensa%20del%20Consumidor%20-%20Stefan%C3%ADa%20Sorribas%20%28URSEC%29.pdf","title":"Defensa del consumidor","filename":"Defensa del Consumidor - Stefanía Sorribas (URSEC).pdf","date_published":"2023-11-28","category":"Materiales didácticos","size_str":"1.03 MB","size_bytes":1080033,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Guia%20PIeL%20para%20la%20industria.pdf","title":"Guía PIeL para la industria","filename":"Guia PIeL para la industria.pdf","date_published":"2020-10-16","category":"Recomendaciones","size_str":"1.54 MB","size_bytes":1614807,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Guia%20PIeL%20para%20encargados%20de%20formular%20pol%C3%ADticas.pdf","title":"Guía PIeL para encargados de formular políticas","filename":"Guia PIeL para encargados de formular políticas.pdf","date_published":"2020-10-16","category":"Recomendaciones","size_str":"1.55 MB","size_bytes":1625292,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/En%20l%C3%ADnea%20con%20SANGO.pdf","title":"En línea con SANGO","filename":"En línea con SANGO.pdf","date_published":"2020-10-16","category":"Recomendaciones","size_str":"4.75 MB","size_bytes":4980736,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Libro%20de%20ejercicios%20sobre%20Seguridad%20en%20L%C3%ADnea%20-%20Trabaja%20con%20SANGO.pdf","title":"Trabaja con SANGO","filename":"Libro de ejercicios sobre Seguridad en Línea - Trabaja con SANGO.pdf","date_published":"2020-10-16","category":"Recomendaciones","size_str":"5.94 MB","size_bytes":6228541,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Guia%20PIeL%20para%20padres%20y%20educadores.pdf","title":"Guía PIeL para ´padres y educadores","filename":"Guia PIeL para padres y educadores.pdf","date_published":"2020-10-16","category":"Recomendaciones","size_str":"2.96 MB","size_bytes":3103784,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/R-REC-P.1546-6-201908.pdf","title":"Recomendación UIT-R P.1546-6 (08/2019)","filename":"R-REC-P.1546-6-201908.pdf","date_published":"2020-02-14","category":"Recomendaciones","size_str":"4.32 MB","size_bytes":4529848,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Empate2019_ResultadosFinal.pdf","title":"Informe EnPaTe 2019","filename":"Empate2019_ResultadosFinal.pdf","date_published":"2019-08-13","category":"Informes","size_str":"793.54 KB","size_bytes":812584,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2020-11/SOLICITUD%20DE%20AUTORIZACI%C3%93N%20DE%20CONCENTRACI%C3%93N.pdf","title":"Formulario de solicitud de autorización de concentración económica","filename":"SOLICITUD DE AUTORIZACIÓN DE CONCENTRACIÓN.pdf","date_published":"2026-04-11","category":"","size_str":"210.78 KB","size_bytes":215838,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2020-01/Modelo%20de%20Certificado%20Notarial%20para%20la%20Declaraci%C3%B3n%20Jurada%20del%20art.%20104%20Lit%20G%20y%20art.%20105%20de%20la%20Ley%2019307.pdf","title":"Modelo de Certificado Notarial para la Declaración Jurada del Art. 104 Lit. G y Art. 105 - Ley 19307","filename":"Modelo de Certificado Notarial para la Declaración Jurada del art. 104 Lit G y art. 105 de la Ley 19307.pdf","date_published":"2026-04-11","category":"","size_str":"115.63 KB","size_bytes":118405,"ext":"pdf","source":"telecom"},{"url":"https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2020-01/Modelo%20Certificado%20Notarial%20Declaraci%C3%B3n%20Jurada%20art%20106%20105%20Ley%2019307%20Persona%20Jur%C3%ADdica.pdf","title":"Modelo de Certificado Notarial para la Declaración Jurada del Art. 105 y 106 - Ley 19307","filename":"Modelo Certificado Notarial Declaración Jurada art 106 105 Ley 19307 Persona Jurídica.pdf","date_published":"2026-04-11","category":"","size_str":"66.12 KB","size_bytes":67706,"ext":"pdf","source":"telecom"}];
+
+// ── State ─────────────────────────────────────────────────────────────
+const state = { query:'', exts:new Set(), cats:new Set(), src:'', sort:'date', dir:-1, chartOpen:false, chartMode:'year' };
+
+// ── Utils ─────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function highlight(text,q) {
+  if(!q) return esc(text);
+  const safeQ=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return esc(text).replace(new RegExp('('+safeQ+')','gi'),'<mark>$1</mark>');
+}
+function fmtSize(b) {
+  if(!b) return '—';
+  if(b<1024) return b+'B';
+  if(b<1048576) return (b/1024).toFixed(1)+'KB';
+  return (b/1048576).toFixed(1)+'MB';
+}
+function extClass(ext) {
+  const e=(ext||'').toLowerCase();
+  return ['pdf','xlsx','ods','docx'].includes(e)?'ext-'+e:'ext-other';
+}
+
+// ── Filter & sort ─────────────────────────────────────────────────────
+function applyFilters() {
+  let d=window.__DATA__.slice();
+  const q=state.query.toLowerCase().trim();
+  if(q) d=d.filter(r=>(r.title||'').toLowerCase().includes(q)||(r.filename||'').toLowerCase().includes(q)||(r.category||'').toLowerCase().includes(q));
+  if(state.exts.size) d=d.filter(r=>state.exts.has((r.ext||'').toLowerCase()));
+  if(state.cats.size) d=d.filter(r=>state.cats.has(r.category||''));
+  if(state.src) d=d.filter(r=>(r.source||'')=== state.src);
+  d.sort((a,b)=>{
+    let va,vb;
+    if(state.sort==='date'){va=a.date_published||'';vb=b.date_published||'';}
+    else if(state.sort==='title'){va=(a.title||'').toLowerCase();vb=(b.title||'').toLowerCase();}
+    else{va=a.size_bytes||0;vb=b.size_bytes||0;}
+    return va<vb?-state.dir:va>vb?state.dir:0;
+  });
+  return d;
+}
+
+// ── Charts ────────────────────────────────────────────────────────────
+function renderBarChart(filtered,mode) {
+  const svg=document.getElementById('chart-svg');
+  const wrap=document.getElementById('chart-svg-wrap');
+  const counts={};
+  filtered.forEach(r=>{
+    let k;
+    if(mode==='year') k=(r.date_published||'').slice(0,4);
+    else if(mode==='month') k=(r.date_published||'').slice(0,7);
+    else k=r.category||'Sin categoría';
+    if(k) counts[k]=(counts[k]||0)+1;
+  });
+  const data=Object.entries(counts).sort((a,b)=>mode==='category'?b[1]-a[1]:a[0]<b[0]?-1:1);
+  if(!data.length){svg.innerHTML='';return;}
+  const PAD={top:28,right:16,bottom:40,left:32};
+  const maxVal=Math.max(...data.map(d=>d[1]));
+  const barW=mode==='category'?Math.max(20,Math.min(56,Math.floor(540/data.length)-4)):28;
+  const gap=mode==='category'?3:6;
+  const W=PAD.left+data.length*(barW+gap)+PAD.right;
+  const H=200,plotH=H-PAD.top-PAD.bottom;
+  svg.setAttribute('width',Math.max(W,wrap.clientWidth||300));
+  svg.setAttribute('height',H);
+  let out='';
+  for(let t=0;t<=4;t++){
+    const val=Math.round(maxVal*t/4);
+    const y=PAD.top+plotH-Math.round((val/maxVal)*plotH);
+    out+=`<line x1="${PAD.left}" x2="${W-PAD.right}" y1="${y}" y2="${y}" stroke="${t===0?'var(--border-mid)':'var(--border)'}" stroke-width="1"/>`;
+    if(t>0) out+=`<text x="${PAD.left-4}" y="${y+4}" font-size="9" fill="var(--text-subtle)" text-anchor="end" font-family="Inter,system-ui">${val}</text>`;
+  }
+  const yearMeta={};
+  if(mode==='month') data.forEach(([k],i)=>{const yr=k.slice(0,4);if(!yearMeta[yr]) yearMeta[yr]={first:i,last:i};else yearMeta[yr].last=i;});
+  const MS_ABBR=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  data.forEach(([key,val],i)=>{
+    const x=PAD.left+i*(barW+gap);
+    const bh=Math.max(2,Math.round((val/maxVal)*plotH));
+    const y=PAD.top+plotH-bh;
+    out+=`<rect x="${x}" y="${y}" width="${barW}" height="${bh}" rx="3" fill="var(--accent)" opacity="0.82"><title>${esc(key)}: ${val} documento${val>1?'s':''}</title></rect>`;
+    if(mode==='year'){
+      out+=`<text x="${x+barW/2}" y="${H-8}" font-size="10" fill="var(--text-subtle)" text-anchor="middle" font-family="Inter,system-ui">${key}</text>`;
+    } else if(mode==='month'){
+      const mo=parseInt(key.slice(5),10);
+      out+=`<text x="${x+barW/2}" y="${H-26}" font-size="8" fill="var(--text-subtle)" text-anchor="middle" font-family="Inter,system-ui">${mo}</text>`;
+      const yr=key.slice(0,4);
+      if(yearMeta[yr]&&yearMeta[yr].first===i&&i>0){const lx=x-gap/2-0.5;out+=`<line x1="${lx}" x2="${lx}" y1="${PAD.top}" y2="${H-20}" stroke="var(--border-mid)" stroke-width="1" stroke-dasharray="3,2"/>`;}
+    } else {
+      const lbl=key.length>14?key.slice(0,13)+'…':key;
+      out+=`<text x="${x+barW/2}" y="${H-6}" font-size="9" fill="var(--text-subtle)" text-anchor="end" transform="rotate(-35 ${x+barW/2} ${H-6})" font-family="Inter,system-ui">${esc(lbl)}</text>`;
+    }
+  });
+  if(mode==='month'){
+    Object.entries(yearMeta).forEach(([yr,{first,last}])=>{
+      const x1=PAD.left+first*(barW+gap),x2=PAD.left+last*(barW+gap)+barW,cx=(x1+x2)/2;
+      out+=`<text x="${cx}" y="${PAD.top-8}" font-size="10" fill="var(--accent)" text-anchor="middle" font-weight="600" font-family="Inter,system-ui">${yr}</text>`;
+      out+=`<line x1="${x1}" x2="${x2}" y1="${PAD.top-3}" y2="${PAD.top-3}" stroke="var(--brand-border)" stroke-width="1"/>`;
+    });
+    if((barW+gap)>=12) data.forEach(([key],i)=>{
+      const x=PAD.left+i*(barW+gap);
+      out+=`<text x="${x+barW/2}" y="${H-10}" font-size="8" fill="var(--text-subtle)" text-anchor="middle" font-family="Inter,system-ui">${MS_ABBR[parseInt(key.slice(5),10)-1]||''}</text>`;
+    });
+  }
+  svg.innerHTML=out;
+}
+
+function renderActivity(filtered) {
+  const svg=document.getElementById('chart-svg');
+  const wrap=document.getElementById('chart-svg-wrap');
+  const day={};
+  filtered.forEach(r=>{const d=r.date_published||'';if(d.length===10) day[d]=(day[d]||0)+1;});
+  const allDays=Object.keys(day).sort();
+  if(!allDays.length){svg.innerHTML='';return;}
+  const MS=86400000,CELL=11,GAP=2,CS=CELL+GAP;
+  const first=new Date(allDays[0]),last=new Date();
+  const sun=new Date(first);sun.setDate(sun.getDate()-sun.getDay());
+  const weeks=Math.ceil((Math.ceil((last-sun)/MS)+1)/7);
+  const LP=22,TP=22,H=TP+7*CS+4,W=LP+weeks*CS;
+  const maxC=Math.max(...Object.values(day),1);
+  function cc(n){if(!n)return '#EFF6FF';const t=n/maxC;if(t<0.2)return '#BFDBFE';if(t<0.45)return '#93C5FD';if(t<0.75)return '#3B82F6';return '#1D4ED8';}
+  let out='';
+  const MN=['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  let lm=-1,ly=-1;
+  for(let w=0;w<weeks;w++){
+    const d=new Date(sun.getTime()+w*7*MS);const mo=d.getMonth(),yr=d.getFullYear();
+    if(mo!==lm){const x=LP+w*CS;if(yr!==ly){out+=`<text x="${x}" y="10" font-size="9" fill="var(--accent)" font-weight="600" font-family="Inter,system-ui">${yr}</text>`;ly=yr;}else{out+=`<text x="${x}" y="10" font-size="9" fill="var(--text-subtle)" font-family="Inter,system-ui">${MN[mo]}</text>`;}lm=mo;}
+  }
+  ['L','M','X','J','V'].forEach((l,i)=>{const y=TP+(i+1)*CS+CELL-2;out+=`<text x="${LP-4}" y="${y}" font-size="8" fill="var(--text-subtle)" text-anchor="end" font-family="Inter,system-ui">${l}</text>`;});
+  for(let w=0;w<weeks;w++){for(let d=0;d<7;d++){const cd=new Date(sun.getTime()+(w*7+d)*MS);if(cd>last)continue;const ds=cd.toISOString().slice(0,10);const c=day[ds]||0;out+=`<rect class="act-cell" x="${LP+w*CS}" y="${TP+d*CS}" width="${CELL}" height="${CELL}" rx="2" fill="${cc(c)}" opacity="${c?1:0.85}"><title>${c?ds+': '+c+' doc'+(c>1?'s':''):ds}</title></rect>`;}}
+  const lx=LP+2,ly2=H-1;
+  out+=`<text x="${lx}" y="${ly2}" font-size="8" fill="var(--text-subtle)" font-family="Inter,system-ui">Menos</text>`;
+  [0,0.2,0.45,0.75,1].forEach((t,i)=>{out+=`<rect x="${lx+36+i*14}" y="${ly2-9}" width="${CELL}" height="${CELL}" rx="2" fill="${cc(t===0?0:Math.ceil(t*maxC))}"/>`;});
+  out+=`<text x="${lx+36+5*14+2}" y="${ly2}" font-size="8" fill="var(--text-subtle)" font-family="Inter,system-ui">Más</text>`;
+  svg.setAttribute('width',W);svg.setAttribute('height',H+10);svg.innerHTML=out;
+}
+
+function renderChart(filtered) {
+  if(!state.chartOpen) return;
+  if(state.chartMode==='activity') renderActivity(filtered);
+  else renderBarChart(filtered,state.chartMode);
+}
+
+// ── Render table ──────────────────────────────────────────────────────
+function render() {
+  const filtered=applyFilters();
+  const tbody=document.getElementById('tbody');
+  const empty=document.getElementById('empty');
+  const q=state.query.trim();
+  document.getElementById('count-shown').textContent=filtered.length;
+  renderChart(filtered);
+  if(!filtered.length){tbody.innerHTML='';empty.classList.add('show');return;}
+  empty.classList.remove('show');
+  tbody.innerHTML=filtered.map(r=>`<tr>
+    <td class="td-date">${esc(r.date_published||'—')}</td>
+    <td class="td-ext"><span class="ext-badge ${extClass(r.ext)}">${esc(r.ext||'?')}</span></td>
+    <td class="td-cat"><span class="cat-badge" title="${esc(r.category)}">${highlight(r.category||'—',q)}</span></td>
+    <td class="td-title">
+      <div class="row-title">${highlight(r.title||r.filename,q)}</div>
+      <div class="row-filename">${highlight(r.filename,q)}</div>
+    </td>
+    <td class="td-size">${fmtSize(r.size_bytes)}</td>
+    <td class="td-src"><span class="src-badge">${esc(r.source||'datos')}</span></td>
+    <td class="td-actions">
+      <a class="dl-btn" href="${esc(r.url||'#')}" target="_blank" rel="noopener" title="Descargar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </a>
+    </td>
+  </tr>`).join('');
+}
+
+function renderActiveFilters() {
+  const pills=[];
+  if(state.query) pills.push(`<span class="active-filter-pill" data-action="clear-query">🔍 "${esc(state.query)}" <span class="pill-x">✕</span></span>`);
+  state.exts.forEach(e=>pills.push(`<span class="active-filter-pill" data-action="clear-ext" data-val="${esc(e)}">.${esc(e)} <span class="pill-x">✕</span></span>`));
+  state.cats.forEach(c=>pills.push(`<span class="active-filter-pill" data-action="clear-cat" data-val="${esc(c)}">${esc(c||'Sin cat')} <span class="pill-x">✕</span></span>`));
+  if(state.src) pills.push(`<span class="active-filter-pill" data-action="clear-src">${esc(state.src)} <span class="pill-x">✕</span></span>`);
+  document.getElementById('active-filters-bar').innerHTML=pills.join('');
+}
+
+function updateAll(){render();renderActiveFilters();}
+
+function buildCatList() {
+  const counts={};
+  window.__DATA__.forEach(r=>{const c=r.category||'';counts[c]=(counts[c]||0)+1;});
+  const cats=Object.entries(counts).sort((a,b)=>b[1]-a[1]||(a[0]||'zzz').localeCompare(b[0]||'zzz','es'));
+  document.getElementById('stat-total').textContent=window.__DATA__.length;
+  document.getElementById('stat-cats').textContent=Object.keys(counts).length;
+  document.getElementById('count-total').textContent=window.__DATA__.length;
+  document.getElementById('cat-list').innerHTML=cats.map(([c,n])=>`
+    <div class="cat-item" data-cat="${esc(c)}">
+      <div class="cat-check">✓</div>
+      <div class="cat-name">${esc(c||'Sin categoría')}</div>
+      <div class="cat-count">${n}</div>
+    </div>`).join('');
+}
+
+// ── Events ────────────────────────────────────────────────────────────
+let st;
+document.getElementById('search-input').addEventListener('input',e=>{
+  clearTimeout(st);const v=e.target.value;
+  document.getElementById('search-clear').classList.toggle('visible',!!v);
+  st=setTimeout(()=>{state.query=v;updateAll();},220);
+});
+document.getElementById('search-clear').addEventListener('click',()=>{
+  document.getElementById('search-input').value='';
+  document.getElementById('search-clear').classList.remove('visible');
+  state.query='';updateAll();
+});
+document.querySelectorAll('.sort-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  const s=btn.dataset.sort;
+  state.dir=(state.sort===s)?state.dir*-1:(s==='date'?-1:1);state.sort=s;
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sort-dir').textContent=state.dir===-1?'↓':'↑';render();
+}));
+document.getElementById('sort-dir').addEventListener('click',()=>{
+  state.dir*=-1;document.getElementById('sort-dir').textContent=state.dir===-1?'↓':'↑';render();
+});
+document.querySelectorAll('.ext-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  const e=btn.dataset.ext;if(state.exts.has(e))state.exts.delete(e);else state.exts.add(e);
+  btn.classList.toggle('active',state.exts.has(e));updateAll();
+}));
+document.querySelectorAll('.src-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  state.src=btn.dataset.src;
+  document.querySelectorAll('.src-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');updateAll();
+}));
+document.getElementById('cat-list').addEventListener('click',e=>{
+  const item=e.target.closest('.cat-item');if(!item)return;
+  const c=item.dataset.cat;if(state.cats.has(c))state.cats.delete(c);else state.cats.add(c);
+  item.classList.toggle('active',state.cats.has(c));updateAll();
+});
+document.getElementById('active-filters-bar').addEventListener('click',e=>{
+  const pill=e.target.closest('.active-filter-pill');if(!pill)return;
+  const {action,val}=pill.dataset;
+  if(action==='clear-query'){state.query='';document.getElementById('search-input').value='';document.getElementById('search-clear').classList.remove('visible');}
+  else if(action==='clear-ext'){state.exts.delete(val);document.querySelector(`.ext-btn[data-ext="${val}"]`)?.classList.remove('active');}
+  else if(action==='clear-cat'){state.cats.delete(val);document.querySelector(`.cat-item[data-cat="${CSS.escape(val)}"]`)?.classList.remove('active');}
+  else if(action==='clear-src'){state.src='';document.querySelector('.src-btn[data-src=""]')?.classList.add('active');document.querySelectorAll('.src-btn:not([data-src=""])').forEach(b=>b.classList.remove('active'));}
+  updateAll();
+});
+document.getElementById('clear-filters').addEventListener('click',()=>{
+  state.query='';state.exts.clear();state.cats.clear();state.src='';
+  document.getElementById('search-input').value='';
+  document.getElementById('search-clear').classList.remove('visible');
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.sort-btn[data-sort="date"]').classList.add('active');
+  state.sort='date';state.dir=-1;document.getElementById('sort-dir').textContent='↓';
+  document.querySelectorAll('.ext-btn,.cat-item').forEach(el=>el.classList.remove('active'));
+  document.querySelector('.src-btn[data-src=""]').classList.add('active');
+  document.querySelectorAll('.src-btn:not([data-src=""])').forEach(b=>b.classList.remove('active'));
+  updateAll();
+});
+document.getElementById('chart-toggle-btn').addEventListener('click',()=>{
+  state.chartOpen=!state.chartOpen;
+  document.getElementById('chart-panel').classList.toggle('open',state.chartOpen);
+  const btn=document.getElementById('chart-toggle-btn');
+  btn.classList.toggle('active',state.chartOpen);
+  btn.textContent=state.chartOpen?'▼ Gráfico':'▲ Gráfico';
+  if(state.chartOpen) renderChart(applyFilters());
+});
+document.querySelectorAll('.chart-mode-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  state.chartMode=btn.dataset.mode;
+  document.querySelectorAll('.chart-mode-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderChart(applyFilters());
+}));
+window.addEventListener('resize',()=>{if(state.chartOpen)renderChart(applyFilters());});
+
+// ── Init ──────────────────────────────────────────────────────────────
+buildCatList();
+updateAll();
+</script>
+</body>
+</html>

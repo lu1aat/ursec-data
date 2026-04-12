@@ -1,0 +1,11 @@
+downloads/
+logs/
+db/runs/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.log
+index.html
+db/ursec.db
+CLAUDE.md

@@ -6,19 +6,17 @@ Ejecutar diariamente. Omite archivos ya descargados.
 """
 
 import csv
-import json
 import logging
 import math
 import re
 import sys
 from datetime import date
 from pathlib import Path
-from urllib.parse import urlparse, unquote
+from urllib.parse import urlparse, unquote, urljoin
 
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
-import paho.mqtt.publish as mqtt_publish
 
 # ---------------------------------------------------------------------------
 # Configuración
@@ -32,6 +30,12 @@ SOURCES = [
         "url":   "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/tematica/servicios-telecomunicaciones",
         "label": "telecom",
     },
+    {
+        # Two-level: listing page → sub-pages → Download links
+        "url":   "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucion/unidad-reguladora-servicios-comunicaciones",
+        "label": "institucion",
+        "mode":  "indexed",
+    },
 ]
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -44,15 +48,14 @@ HEADERS = {
     "Accept-Language": "es-UY,es;q=0.9,en;q=0.8",
 }
 
-MQTT_HOST  = "test.mosquitto.org"
-MQTT_PORT  = 1883
-MQTT_TOPIC = "udata"
+BASE_URL = "https://www.gub.uy"
 
-DB_DIR        = Path("db")
-DOWNLOADS_DIR = Path("downloads")
-LOGS_DIR      = Path("logs")
-RUNS_DIR      = DB_DIR / "runs"
-CUMULATIVE_CSV = DB_DIR / "files.csv"
+DB_DIR          = Path("db")
+DOWNLOADS_DIR   = Path("downloads")
+LOGS_DIR        = Path("logs")
+RUNS_DIR        = DB_DIR / "runs"
+CUMULATIVE_CSV  = DB_DIR / "files.csv"
+VISITED_PAGES   = DB_DIR / "visited_pages.txt"
 
 CSV_FIELDS = [
     "url", "filename", "title", "date_published", "category",
@@ -121,6 +124,16 @@ def save_run_csv(downloaded: list, skipped: list, failed: list):
     return run_csv
 
 
+def load_visited_pages() -> set:
+    if VISITED_PAGES.exists():
+        return set(VISITED_PAGES.read_text(encoding="utf-8").splitlines())
+    return set()
+
+
+def save_visited_pages(visited: set):
+    VISITED_PAGES.write_text("\n".join(sorted(visited)), encoding="utf-8")
+
+
 # ---------------------------------------------------------------------------
 # Helpers: parsing
 # ---------------------------------------------------------------------------
@@ -182,13 +195,11 @@ def parse_page(soup: BeautifulSoup, page_url: str, source_label: str = "") -> li
         for box in body.find_all("span", class_="Box-info"):
             box_text = box.get_text(strip=True)
             if re.search(r"\d{2}/\d{2}/\d{4}", box_text):
-                # Este span tiene la fecha
                 date_published = parse_date(box_text)
                 strong = box.find("strong")
                 if strong:
                     category = strong.get_text(strip=True)
             elif box_text and not category:
-                # Span de solo categoría (patrón telecom: Box-info u-h5)
                 category = box_text
 
         # ── Título del item ────────────────────────────────────────────────
@@ -204,12 +215,10 @@ def parse_page(soup: BeautifulSoup, page_url: str, source_label: str = "") -> li
             aria = dl.get("aria-label", "")
             dl_title, size_str = extract_size_from_aria(aria)
 
-            # Si aria no tenía título, usar el del item
             if not dl_title:
                 dt_div = dl.find("div", class_="Download-title")
                 if dt_div:
                     dt_text = dt_div.get_text(strip=True)
-                    # quitar el "(.ext SIZE)" del final
                     dl_title = re.sub(r"\s+\(\.[^)]+\)$", "", dt_text).strip()
             if not dl_title:
                 dl_title = item_title
@@ -231,6 +240,98 @@ def parse_page(soup: BeautifulSoup, page_url: str, source_label: str = "") -> li
             })
 
     return items
+
+
+def parse_subpage(
+    soup: BeautifulSoup,
+    page_url: str,
+    source_label: str,
+    fallback_title: str,
+    fallback_date: str,
+    fallback_category: str,
+) -> list[dict]:
+    """
+    Extrae archivos de sub-páginas del tipo 'institucion'.
+    Estructura: <ul class="Page-downloads"><li><a class="Download" aria-label="..."></li></ul>
+    Los links usan el mismo aria-label que las fuentes planas, pero no están
+    dentro de <li class="Media">, por eso parse_page no los encuentra.
+    """
+    items = []
+
+    for dl in soup.find_all("a", class_="Download"):
+        href = dl.get("href", "").strip()
+        if not href:
+            continue
+        href = urljoin(BASE_URL, href)
+
+        aria = dl.get("aria-label", "")
+        dl_title, size_str = extract_size_from_aria(aria)
+
+        if not dl_title:
+            dt_div = dl.find("div", class_="Download-title")
+            if dt_div:
+                dl_title = re.sub(r"\s+\(\.[^)]+\)$", "", dt_div.get_text(strip=True)).strip()
+        if not dl_title:
+            dl_title = fallback_title
+
+        filename = unquote(urlparse(href).path.split("/")[-1])
+        if not filename:
+            continue
+
+        items.append({
+            "url":            href,
+            "filename":       filename,
+            "title":          dl_title,
+            "date_published": fallback_date,
+            "category":       fallback_category,
+            "size_str":       size_str,
+            "size_bytes":     parse_size_bytes(size_str),
+            "page_url":       page_url,
+            "first_seen":     TODAY,
+            "local_path":     "",
+            "source":         source_label,
+        })
+
+    return items
+
+
+def parse_listing_page(soup: BeautifulSoup) -> list[dict]:
+    """
+    Para fuentes de tipo 'indexed': extrae los sub-enlaces de cada <li class="Media">.
+    Devuelve lista de {url, title, date_published, category}.
+    """
+    entries = []
+    for li in soup.find_all("li", class_="Media"):
+        body = li.find("div", class_="Media-body")
+        if not body:
+            continue
+
+        h3 = body.find("h3")
+        if not h3:
+            continue
+        a = h3.find("a", href=True)
+        if not a:
+            continue
+
+        href = urljoin(BASE_URL, a["href"])
+        title = a.get_text(strip=True)
+
+        date_published = TODAY
+        category = ""
+        for box in body.find_all(["span", "div"], class_="Box-info"):
+            box_text = box.get_text(strip=True)
+            if re.search(r"\d{2}/\d{2}/\d{4}", box_text):
+                date_published = parse_date(box_text)
+            elif box_text and not category and not re.search(r"\d{2}/\d{2}/\d{4}", box_text):
+                category = box_text
+
+        entries.append({
+            "url":            href,
+            "title":          title,
+            "date_published": date_published,
+            "category":       category,
+        })
+    return entries
 
 
 def get_pagination(soup: BeautifulSoup) -> tuple[int, int, int]:
@@ -255,13 +356,136 @@ def get_pagination(soup: BeautifulSoup) -> tuple[int, int, int]:
 
 
 # ---------------------------------------------------------------------------
+# Scraping strategies
+# ---------------------------------------------------------------------------
+
+def scrape_flat_source(source: dict, session: requests.Session, log) -> list[dict]:
+    """Fuente directa: cada página de listado contiene <a class='Download'>."""
+    base_url  = source["url"]
+    src_label = source["label"]
+    all_items = []
+
+    try:
+        resp = session.get(base_url, timeout=30)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, "html.parser")
+    except Exception as exc:
+        log.error(f"  Error al cargar {base_url}: {exc}")
+        return all_items
+
+    total_results, per_page, total_pages = get_pagination(soup)
+    log.info(
+        f"  Paginador: {total_results} resultados | "
+        f"{per_page} por página | {total_pages} páginas"
+    )
+
+    items_p0 = parse_page(soup, base_url, src_label)
+    all_items.extend(items_p0)
+    log.info(f"  Página 1/{total_pages}: {len(items_p0)} archivos")
+
+    with tqdm(total=total_pages, desc=f"  {src_label}", unit="pág") as pbar:
+        pbar.update(1)
+        for page_num in range(1, total_pages):
+            page_url = f"{base_url}?page={page_num}"
+            try:
+                r = session.get(page_url, timeout=30)
+                r.raise_for_status()
+                s = BeautifulSoup(r.text, "html.parser")
+                items_pn = parse_page(s, page_url, src_label)
+                all_items.extend(items_pn)
+                log.info(f"  Página {page_num+1}/{total_pages}: {len(items_pn)} archivos")
+            except Exception as exc:
+                log.error(f"  Error en página {page_num+1}: {exc}")
+            pbar.update(1)
+
+    return all_items
+
+
+def scrape_indexed_source(
+    source: dict,
+    session: requests.Session,
+    visited: set,
+    log,
+) -> list[dict]:
+    """
+    Fuente de dos niveles: el listado enlaza a sub-páginas que contienen
+    archivos en <div class="descargas">. Solo visita sub-páginas nuevas.
+    """
+    base_url  = source["url"]
+    src_label = source["label"]
+    all_items = []
+
+    # ── Paso 1: recolectar sub-URLs del listado paginado ──────────────────
+    try:
+        resp = session.get(base_url, timeout=30)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, "html.parser")
+    except Exception as exc:
+        log.error(f"  Error al cargar {base_url}: {exc}")
+        return all_items
+
+    total_results, per_page, total_pages = get_pagination(soup)
+    log.info(
+        f"  Paginador: {total_results} resultados | "
+        f"{per_page} por página | {total_pages} páginas"
+    )
+
+    sub_entries: list[dict] = parse_listing_page(soup)
+
+    with tqdm(total=total_pages, desc=f"  {src_label} listado", unit="pág") as pbar:
+        pbar.update(1)
+        for page_num in range(1, total_pages):
+            page_url = f"{base_url}?page={page_num}"
+            try:
+                r = session.get(page_url, timeout=30)
+                r.raise_for_status()
+                s = BeautifulSoup(r.text, "html.parser")
+                sub_entries.extend(parse_listing_page(s))
+            except Exception as exc:
+                log.error(f"  Error en página {page_num+1}: {exc}")
+            pbar.update(1)
+
+    # ── Paso 2: visitar solo sub-páginas nuevas ────────────────────────────
+    new_entries = [e for e in sub_entries if e["url"] not in visited]
+    log.info(
+        f"  Sub-páginas: {len(sub_entries)} encontradas | "
+        f"{len(new_entries)} nuevas | {len(sub_entries)-len(new_entries)} ya visitadas"
+    )
+
+    found_files = 0
+    with tqdm(total=len(new_entries), desc=f"  {src_label} sub-páginas", unit="pág") as pbar:
+        for entry in new_entries:
+            try:
+                r = session.get(entry["url"], timeout=30)
+                r.raise_for_status()
+                s = BeautifulSoup(r.text, "html.parser")
+                items = parse_subpage(
+                    s,
+                    entry["url"],
+                    src_label,
+                    fallback_title=entry["title"],
+                    fallback_date=entry["date_published"],
+                    fallback_category=entry["category"],
+                )
+                all_items.extend(items)
+                found_files += len(items)
+            except Exception as exc:
+                log.error(f"  Error en sub-página {entry['url']}: {exc}")
+            finally:
+                visited.add(entry["url"])
+            pbar.update(1)
+
+    log.info(f"  Archivos encontrados en sub-páginas: {found_files}")
+    return all_items
+
+
+# ---------------------------------------------------------------------------
 # Descarga de archivo individual
 # ---------------------------------------------------------------------------
 
 def download_file(url: str, dest: Path, session: requests.Session) -> Path:
     dest.parent.mkdir(parents=True, exist_ok=True)
 
-    # Evitar sobreescribir si existe (mismo nombre, distinta ejecución)
     if dest.exists():
         stem, suffix = dest.stem, dest.suffix
         dest = dest.parent / f"{stem}_{TODAY}{suffix}"
@@ -285,25 +509,6 @@ def download_file(url: str, dest: Path, session: requests.Session) -> Path:
 
 
 # ---------------------------------------------------------------------------
-# MQTT
-# ---------------------------------------------------------------------------
-
-def notify_mqtt(payload: dict, log):
-    try:
-        mqtt_publish.single(
-            topic=MQTT_TOPIC,
-            payload=json.dumps(payload, ensure_ascii=False),
-            hostname=MQTT_HOST,
-            port=MQTT_PORT,
-            client_id="ursec-downloader",
-            keepalive=10,
-        )
-        log.info(f"MQTT OK → {MQTT_HOST}:{MQTT_PORT} [{MQTT_TOPIC}]")
-    except Exception as exc:
-        log.warning(f"MQTT falló: {exc}")
-
-
-# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -319,60 +524,26 @@ def main() -> int:
     session = requests.Session()
     session.headers.update(HEADERS)
 
-    # ── Cargar DB existente ────────────────────────────────────────────────
-    db = load_cumulative_db()
-    log.info(f"DB cargada: {len(db)} archivos conocidos")
+    db      = load_cumulative_db()
+    visited = load_visited_pages()
+    log.info(f"DB cargada: {len(db)} archivos conocidos | {len(visited)} sub-páginas visitadas")
 
-    # ── Scraping de todas las fuentes ─────────────────────────────────────
     all_items: list[dict] = []
 
     for source in SOURCES:
-        base_url    = source["url"]
-        src_label   = source["label"]
-        log.info(f"Fuente [{src_label}]: {base_url}")
-
-        try:
-            resp = session.get(base_url, timeout=30)
-            resp.raise_for_status()
-            soup = BeautifulSoup(resp.text, "html.parser")
-        except Exception as exc:
-            log.error(f"  Error al cargar {base_url}: {exc}")
-            continue
-
-        total_results, per_page, total_pages = get_pagination(soup)
-        log.info(
-            f"  Paginador: {total_results} resultados | "
-            f"{per_page} por página | {total_pages} páginas"
-        )
-
-        # página 0 ya descargada
-        items_p0 = parse_page(soup, base_url, src_label)
-        all_items.extend(items_p0)
-        log.info(f"  Página 1/{total_pages}: {len(items_p0)} archivos")
-
-        with tqdm(total=total_pages, desc=f"  {src_label}", unit="pág") as pbar:
-            pbar.update(1)
-            for page_num in range(1, total_pages):
-                page_url = f"{base_url}?page={page_num}"
-                try:
-                    r = session.get(page_url, timeout=30)
-                    r.raise_for_status()
-                    s = BeautifulSoup(r.text, "html.parser")
-                    items_pn = parse_page(s, page_url, src_label)
-                    all_items.extend(items_pn)
-                    log.info(f"  Página {page_num+1}/{total_pages}: {len(items_pn)} archivos")
-                except Exception as exc:
-                    log.error(f"  Error en página {page_num+1}: {exc}")
-                pbar.update(1)
+        log.info(f"Fuente [{source['label']}]: {source['url']}")
+        if source.get("mode") == "indexed":
+            items = scrape_indexed_source(source, session, visited, log)
+        else:
+            items = scrape_flat_source(source, session, log)
+        all_items.extend(items)
 
     log.info(f"Total archivos encontrados en todas las fuentes: {len(all_items)}")
 
-    # ── Clasificar nuevos vs conocidos ─────────────────────────────────────
     new_items     = [i for i in all_items if i["url"] not in db]
     skipped_items = [db[i["url"]] for i in all_items if i["url"] in db]
     log.info(f"Nuevos: {len(new_items)} | Ya descargados: {len(skipped_items)}")
 
-    # ── Descargar nuevos ───────────────────────────────────────────────────
     downloaded: list[dict] = []
     failed:     list[dict] = []
 
@@ -393,13 +564,12 @@ def main() -> int:
 
             pbar.update(1)
 
-    # ── Persistir ──────────────────────────────────────────────────────────
     save_cumulative_db(db)
+    save_visited_pages(visited)
     run_csv = save_run_csv(downloaded, skipped_items, failed)
     log.info(f"DB acumulativa guardada: {CUMULATIVE_CSV}")
     log.info(f"CSV de esta ejecución:   {run_csv}")
 
-    # ── Resumen ────────────────────────────────────────────────────────────
     summary = {
         "run_date":        TODAY,
         "total_found":     len(all_items),
@@ -415,9 +585,6 @@ def main() -> int:
     for k, v in summary.items():
         log.info(f"  {k:20s}: {v}")
     log.info("=" * 60)
-
-    # ── Notificación MQTT ──────────────────────────────────────────────────
-    notify_mqtt(summary, log)
 
     return 1 if failed else 0
 

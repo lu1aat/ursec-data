@@ -5,6 +5,7 @@ Descarga comunicaciones de URSEC y las organiza por fecha de publicación.
 Ejecutar diariamente. Omite archivos ya descargados.
 """
 
+import argparse
 import csv
 import logging
 import math
@@ -359,7 +360,7 @@ def get_pagination(soup: BeautifulSoup) -> tuple[int, int, int]:
 # Scraping strategies
 # ---------------------------------------------------------------------------
 
-def scrape_flat_source(source: dict, session: requests.Session, log) -> list[dict]:
+def scrape_flat_source(source: dict, session: requests.Session, log, max_pages: int = 0) -> list[dict]:
     """Fuente directa: cada página de listado contiene <a class='Download'>."""
     base_url  = source["url"]
     src_label = source["label"]
@@ -374,18 +375,20 @@ def scrape_flat_source(source: dict, session: requests.Session, log) -> list[dic
         return all_items
 
     total_results, per_page, total_pages = get_pagination(soup)
+    effective_pages = min(total_pages, max_pages) if max_pages > 0 else total_pages
     log.info(
         f"  Paginador: {total_results} resultados | "
         f"{per_page} por página | {total_pages} páginas"
+        + (f" (limitado a {effective_pages})" if max_pages > 0 else "")
     )
 
     items_p0 = parse_page(soup, base_url, src_label)
     all_items.extend(items_p0)
-    log.info(f"  Página 1/{total_pages}: {len(items_p0)} archivos")
+    log.info(f"  Página 1/{effective_pages}: {len(items_p0)} archivos")
 
-    with tqdm(total=total_pages, desc=f"  {src_label}", unit="pág") as pbar:
+    with tqdm(total=effective_pages, desc=f"  {src_label}", unit="pág") as pbar:
         pbar.update(1)
-        for page_num in range(1, total_pages):
+        for page_num in range(1, effective_pages):
             page_url = f"{base_url}?page={page_num}"
             try:
                 r = session.get(page_url, timeout=30)
@@ -393,7 +396,7 @@ def scrape_flat_source(source: dict, session: requests.Session, log) -> list[dic
                 s = BeautifulSoup(r.text, "html.parser")
                 items_pn = parse_page(s, page_url, src_label)
                 all_items.extend(items_pn)
-                log.info(f"  Página {page_num+1}/{total_pages}: {len(items_pn)} archivos")
+                log.info(f"  Página {page_num+1}/{effective_pages}: {len(items_pn)} archivos")
             except Exception as exc:
                 log.error(f"  Error en página {page_num+1}: {exc}")
             pbar.update(1)
@@ -406,6 +409,7 @@ def scrape_indexed_source(
     session: requests.Session,
     visited: set,
     log,
+    max_pages: int = 0,
 ) -> list[dict]:
     """
     Fuente de dos niveles: el listado enlaza a sub-páginas que contienen
@@ -425,16 +429,18 @@ def scrape_indexed_source(
         return all_items
 
     total_results, per_page, total_pages = get_pagination(soup)
+    effective_pages = min(total_pages, max_pages) if max_pages > 0 else total_pages
     log.info(
         f"  Paginador: {total_results} resultados | "
         f"{per_page} por página | {total_pages} páginas"
+        + (f" (limitado a {effective_pages})" if max_pages > 0 else "")
     )
 
     sub_entries: list[dict] = parse_listing_page(soup)
 
-    with tqdm(total=total_pages, desc=f"  {src_label} listado", unit="pág") as pbar:
+    with tqdm(total=effective_pages, desc=f"  {src_label} listado", unit="pág") as pbar:
         pbar.update(1)
-        for page_num in range(1, total_pages):
+        for page_num in range(1, effective_pages):
             page_url = f"{base_url}?page={page_num}"
             try:
                 r = session.get(page_url, timeout=30)
@@ -513,12 +519,21 @@ def download_file(url: str, dest: Path, session: requests.Session) -> Path:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="URSEC Data Downloader")
+    parser.add_argument(
+        "--max-pages", type=int, default=0, metavar="N",
+        help="Límite de páginas a scrapear por fuente (0 = sin límite)",
+    )
+    args = parser.parse_args()
+
     setup_dirs()
     log, log_file = setup_logging()
 
     log.info("=" * 60)
     log.info("URSEC Downloader iniciado")
     log.info(f"Fecha de ejecución: {TODAY}")
+    if args.max_pages:
+        log.info(f"Límite de páginas por fuente: {args.max_pages}")
     log.info("=" * 60)
 
     session = requests.Session()
@@ -533,9 +548,9 @@ def main() -> int:
     for source in SOURCES:
         log.info(f"Fuente [{source['label']}]: {source['url']}")
         if source.get("mode") == "indexed":
-            items = scrape_indexed_source(source, session, visited, log)
+            items = scrape_indexed_source(source, session, visited, log, max_pages=args.max_pages)
         else:
-            items = scrape_flat_source(source, session, log)
+            items = scrape_flat_source(source, session, log, max_pages=args.max_pages)
         all_items.extend(items)
 
     log.info(f"Total archivos encontrados en todas las fuentes: {len(all_items)}")

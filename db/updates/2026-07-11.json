@@ -1,0 +1,71 @@
+{
+  "date": "2026-07-11",
+  "count": 8,
+  "summary": "Se incorporaron 8 archivos nuevos: 6 resoluciones institucionales dictadas entre marzo y mayo de 2026, y 2 planillas de Radiodifusión y TV Abonados con el padrón de medios. Entre las resoluciones destacan una multa a ADT Security Services S.A. por incumplir el Registro Nacional No Llame, el traspaso de la licencia y el canal de 173,075 MHz de radiolocalización vehicular de Boisen S.A. a Strix Uruguay S.A., la asignación de nuevos canales radioeléctricos reservados a Antel, la adjudicación del mantenimiento de la Estación de Monitoreo de Melilla a Aeromarine S.A. por USD 14.030, y una medida cautelar a favor de DIRECTV que habilita el bloqueo exprés de transmisiones ilegales de la Copa Sudamericana 2026 y notifica a 52 proveedores de internet y cable. Las dos planillas actualizan el padrón de medios registrados ante URSEC y su titularidad.",
+  "files": [
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Tabla%20de%20Medios%2009_07_2026.xlsx",
+      "filename": "Tabla de Medios 09_07_2026.xlsx",
+      "title": "Tabla de medios",
+      "category": "Radiodifusión y TV Abonados",
+      "ext": "xlsx",
+      "summary": "Planilla con una única hoja ('Consulta de Tabla de Medios y S') de 877 filas y 14 columnas: tipo y modo de medio, razón social, nombre fantasía de empresa y de medio, estado de la empresa y del medio, correo electrónico, departamento, localidad, distintivo, frecuencia, estado de operación y sitio web. Es el padrón operativo completo de medios de radiodifusión y TV para abonados habilitados en el país, con su estado administrativo (activo/inactivo) a nivel de empresa y de cada medio individual."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Titularidad%20de%20medios%2008_07_2026.xlsx",
+      "filename": "Titularidad de medios 08_07_2026.xlsx",
+      "title": "Titularidad de medios",
+      "category": "Radiodifusión y TV Abonados",
+      "ext": "xlsx",
+      "summary": "Dos hojas: 'Medios registados ante URSEC' (993 filas x 15 columnas) con titular persona física o jurídica, tipo de empresa, distintivo, nombre fantasía, accionistas/socios y su % de participación, número de resolución habilitante con hasta dos enlaces a la resolución correspondiente, departamento y localidad; y 'Medios con registro pendiente' (40 filas x 10 columnas) con la misma estructura reducida para medios cuyo trámite de registro de titularidad todavía no se resolvió. Es el registro societario/accionario de cada medio, complementario a la Tabla de Medios."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/106_2025-71-1-0000103_LA_26-2026_Estaciones_remotas_de_monitoreo.pdf",
+      "filename": "106_2025-71-1-0000103_LA_26-2026_Estaciones_remotas_de_monitoreo.pdf",
+      "title": "Resolución 106/2026 - Dejar sin efecto la Resolución de URSEC N° 211/2025",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Expediente 2025-71-1-0000103, Acta 15/2026, 26 de mayo de 2026. La compra de componentes para Estaciones Remotas de Monitoreo (ERM – Espectro Visor), aprobada en 2025 por la Resolución 211/2025, se reprogramó para 2026: URSEC deja sin efecto esa resolución y aprueba el mismo Pliego Particular de Condiciones (con sus Anexos I y II) renumerado como Licitación Abreviada N° 26/2026 en lugar de N° 25/2025 — el resto del pliego no cambia. Amplía la Comisión Asesora de Adjudicaciones incorporando a Nelson Manacorda. Se funda en crédito disponible para 2026 (APG N° 88 del 17/04/2026), la Ley 19.889 y el Decreto 150/2012 (TOCAF)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/63_2024-71-1-0000147_ADT_SECURITY_SERVICES_SA_-No_llame%20%281%29.pdf",
+      "filename": "63_2024-71-1-0000147_ADT_SECURITY_SERVICES_SA_-No_llame (1).pdf",
+      "title": "Resolución 63/2026 - Sanción a Ast Security Services S.A por incumplimiento del Registro Nacional No Llame",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Expediente 2024-71-1-0000147, Acta 8/2026, 27 de marzo de 2026. ADT Security Services S.A. contactó telefónicamente a usuarios inscriptos en el Registro Nacional No Llame, generando 37 denuncias presentadas por trámite en línea entre 2022 y 2023 (identificadas con números como 2022-71-6256-003678 a 2022-71-6256-008416 y 2023-71-6256-004554, entre otras); la empresa no evacuó la vista conferida. Se le impone una multa de 31 Unidades Reajustables por incumplir el art. 4 literal a) del Decreto 132/022 (que reglamenta el art. 181 de la Ley 19.996). URSEC aplica la escala de graduación de su propia Resolución 275/2023 (1 a 3 faltas = observación, 4 a 6 = apercibimiento, 7 o más = multa); ADT no registraba sanciones previas por este motivo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/68_2025-71-1-0000396-_Estacion_Melilla.pdf",
+      "filename": "68_2025-71-1-0000396-_Estacion_Melilla.pdf",
+      "title": "Resolución 68/2026 - Compra Directa por mantenimiento del predio de Melilla",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Expediente 2025-71-1-0000396, Acta 8/2026, 27 de marzo de 2026. Se adjudica a Aeromarine S.A. (única oferente entre tres empresas invitadas, con estado 'Activo' en RUPE) la Compra Directa Ampliada N° 13/2026 para el mantenimiento preventivo de la Estación de Monitoreo de URSEC en Melilla, exigido por el Manual de Comprobación Técnica del Espectro de la UIT. Monto: USD 11.500 más IVA = USD 14.030 total, imputado al Objeto del gasto 3.5.8.000 'Equipos de Comunicaciones', Proyecto 004, financiación 1.2 (recursos con afectación especial). Antes de cobrar, Aeromarine debe presentar un informe con estado inicial y final del sistema, mantenimiento realizado y mediciones; el trámite pasa luego por el Contador Delegado del Tribunal de Cuentas."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/69_2025-71-1-0000826_STRIX_URUGUAY_lic_clase_B_y_C.pdf",
+      "filename": "69_2025-71-1-0000826_STRIX_URUGUAY_lic_clase_B_y_C.pdf",
+      "title": "Resolución 69/2026 - Dejar sin efecto la licencia de telecomunicaciones clase “C” otorgada a Boisen S.A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Expediente 2025-71-1-0000826, Acta 8/2026, 27 de marzo de 2026. Boisen S.A. tenía desde la Resolución 151/005 (28/04/2005) la licencia clase C y el canal radioeléctrico para radiolocalización vehicular; a pedido conjunto de ambas empresas, URSEC le da de baja esa licencia y el canal a partir del 28/02/2026, y otorga a Strix Uruguay S.A. la licencia clase B para el mismo servicio a partir de marzo 2026. El canal transferido es 173,075 MHz, uso exclusivo, servicio móvil, ancho de banda 25 kHz, territorio nacional. Strix debe pagar 50.000 Unidades Indexadas dentro de los 30 días de notificada y reportar mensualmente (antes del día 10) las altas y bajas de estaciones de abonado vía trámite en línea; la autorización es precaria y revocable, y las estaciones pueden inspeccionarse en cualquier momento."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/70_2026-71-1-0000097-ANTEL_asig_canales_radiorelectricos%20%281%29.pdf",
+      "filename": "70_2026-71-1-0000097-ANTEL_asig_canales_radiorelectricos (1).pdf",
+      "title": "Resolución 70/2026 - Alta y baja de canales radioeléctricos Antel",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Expediente 2026-71-1-0000097, Acta 8/2026, 27 de marzo de 2026. A pedido de Antel (comunicación 093/26 del 27/02/2026), para operar en forma transitoria dos radioenlaces punto a punto en frecuencias superiores a 1 GHz (uno de ellos modificado respecto de lo solicitado por razones de compatibilidad radioeléctrica), URSEC da de baja los canales radioeléctricos vigentes de esos enlaces y asigna los nuevos. A diferencia de la Resolución 69/2026, acá el Anexo con el detalle de frecuencias específicas queda declarado reservado y no está incluido en el documento publicado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/43_2026-71-1-0000077-DIRECTV-copa_sudamericana.pdf",
+      "filename": "43_2026-71-1-0000077-DIRECTV-copa_sudamericana.pdf",
+      "title": "Resolución 43/2026 - Medida cautelar sobre el evento cautelar \"Copa Conmebol Sudamericana 2026\"",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Expediente 2026-71-1-0000077, Acta 6/2026, 11 de marzo de 2026. A solicitud de Martín Motta en representación de DIRECTV de Uruguay Ltda. (18/02/2026), URSEC hace lugar a una medida cautelar al amparo del art. 233 de la Ley 20.075 y el Decreto 324/023: protege los derechos de transmisión de DIRECTV sobre la Copa CONMEBOL Sudamericana (fases preliminares, grupos y finales) durante todo 2026 (1° de marzo al 31 de diciembre). La medida no bloquea sitios de antemano — habilita a DIRECTV a pedir directamente a los ISP, bajo declaración jurada y responsabilidad exclusiva, la inhabilitación de dominios puntuales que detecte transmitiendo ilegalmente, con un plazo de 30 minutos para los ISP y notificando el reclamo a contacto@afymconsultores.com; DIRECTV debe luego informar a URSEC en 5 días hábiles. Se notifica a 52 entidades: Antel y una larga lista de proveedores de internet y cableoperadoras de todo el país (entre ellas Telefónica Móviles, Starlink Uruguay, Amazon Kuiper Uruguay, Dedicado, Enalur, y decenas de cableoperadoras del interior), además de AGESIC."
+    }
+  ]
+}

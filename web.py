@@ -11,8 +11,9 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-DB_FILE     = Path("db/files.csv")
-OUTPUT_FILE = Path("docs/index.html")
+DB_FILE      = Path("db/files.csv")
+UPDATES_DIR  = Path("db/updates")
+OUTPUT_FILE  = Path("docs/index.html")
 
 
 # ---------------------------------------------------------------------------
@@ -42,6 +43,19 @@ def load_records(db_path: Path) -> list[dict]:
                 "source":         row.get("source", "datos"),
             })
     return records
+
+
+def load_updates(updates_dir: Path) -> list[dict]:
+    """Carga db/updates/*.json (resúmenes de cada actualización), más reciente primero."""
+    updates = []
+    if not updates_dir.exists():
+        return updates
+    for path in sorted(updates_dir.glob("*.json"), reverse=True):
+        try:
+            updates.append(json.loads(path.read_text(encoding="utf-8")))
+        except (json.JSONDecodeError, OSError):
+            continue
+    return updates
 
 
 # ---------------------------------------------------------------------------
@@ -130,6 +144,55 @@ html, body {
   transition: all var(--transition); white-space: nowrap;
 }
 .ursec-link:hover { color: #fff; border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.1); }
+#updates-btn {
+  font-size: 11px; color: rgba(255,255,255,0.7); background: none; cursor: pointer;
+  padding: 5px 11px; border: 1px solid rgba(255,255,255,0.25); border-radius: var(--radius);
+  transition: all var(--transition); white-space: nowrap; font-family: inherit;
+}
+#updates-btn:hover { color: #fff; border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.1); }
+
+/* ── Historial de actualizaciones (modal) ────────────────────────────── */
+#updates-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(15,23,42,0.45);
+}
+#updates-overlay.open { display: block; }
+#updates-modal {
+  display: none; position: fixed; z-index: 201;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: min(640px, 92vw); max-height: 82vh;
+  background: var(--surface); border-radius: 10px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  flex-direction: column; overflow: hidden;
+}
+#updates-modal.open { display: flex; }
+#updates-modal-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 18px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+#updates-modal-header h2 { font-size: 15px; font-weight: 700; color: var(--text); }
+.updates-gen-at { font-size: 11px; color: var(--text-subtle); margin-left: auto; }
+#updates-close {
+  background: none; border: none; color: var(--text-subtle); cursor: pointer;
+  font-size: 14px; padding: 4px; line-height: 1; transition: color var(--transition);
+}
+#updates-close:hover { color: var(--text); }
+#updates-modal-body { overflow-y: auto; padding: 16px 18px; display: flex; flex-direction: column; gap: 14px; }
+.updates-empty { color: var(--text-muted); font-size: 13px; padding: 20px 0; text-align: center; }
+.update-entry { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+.update-entry-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.update-date { font-size: 13px; font-weight: 700; color: var(--text); }
+.update-count { font-size: 11px; color: var(--accent); background: var(--brand-light); border-radius: 20px; padding: 2px 9px; font-weight: 600; }
+.update-summary { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; }
+.update-files { margin-top: 8px; }
+.update-files summary { font-size: 11px; color: var(--accent); cursor: pointer; user-select: none; }
+.update-files ul { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 12px; }
+.update-files li { display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
+.update-file-head { display: flex; align-items: center; gap: 8px; }
+.update-file-head a { color: var(--text); text-decoration: none; font-weight: 600; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.update-file-head a:hover { color: var(--accent); text-decoration: underline; }
+.update-file-cat { font-size: 10.5px; color: var(--text-subtle); flex-shrink: 0; }
+.update-file-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.5; padding-left: 2px; }
 
 /* ── Layout ───────────────────────────────────────────────────────── */
 #layout { display: flex; height: 100vh; padding-top: var(--header-h); }
@@ -362,10 +425,21 @@ mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; bord
     <div class="hstat"><strong id="stat-cats">0</strong> categorías</div>
   </div>
   <div class="header-right">
-    <span class="gen-at">Actualizado: /*GENERATED_AT*/</span>
+    <button id="updates-btn" type="button">🕘 Historial de actualizaciones</button>
     <a class="ursec-link" href="https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/datos-y-estadisticas/datos" target="_blank" rel="noopener">↗ Fuente</a>
   </div>
 </header>
+
+<!-- Historial de actualizaciones -->
+<div id="updates-overlay"></div>
+<div id="updates-modal" role="dialog" aria-modal="true" aria-labelledby="updates-modal-title">
+  <div id="updates-modal-header">
+    <h2 id="updates-modal-title">Historial de actualizaciones</h2>
+    <span class="updates-gen-at">Sitio generado: /*GENERATED_AT*/</span>
+    <button id="updates-close" type="button" aria-label="Cerrar">✕</button>
+  </div>
+  <div id="updates-modal-body"></div>
+</div>
 
 <!-- Layout -->
 <div id="layout">
@@ -473,6 +547,7 @@ mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; bord
 
 <script>
 window.__DATA__ = /*INJECT_DATA*/[];
+window.__UPDATES__ = /*INJECT_UPDATES*/[];
 
 // ── State ─────────────────────────────────────────────────────────────
 const state = { query:'', exts:new Set(), cats:new Set(), src:'', sort:'date', dir:-1, chartOpen:false, chartMode:'year' };
@@ -671,6 +746,44 @@ function buildCatList() {
     </div>`).join('');
 }
 
+function renderUpdates() {
+  const body=document.getElementById('updates-modal-body');
+  if(!window.__UPDATES__.length){
+    body.innerHTML='<p class="updates-empty">Todavía no hay resúmenes de actualización.</p>';
+    return;
+  }
+  body.innerHTML=window.__UPDATES__.map(u=>`
+    <div class="update-entry">
+      <div class="update-entry-head">
+        <span class="update-date">${esc(u.date)}</span>
+        <span class="update-count">${u.count} archivo${u.count===1?'':'s'} nuevo${u.count===1?'':'s'}</span>
+      </div>
+      <p class="update-summary">${esc(u.summary)}</p>
+      <details class="update-files">
+        <summary>Ver archivos (${(u.files||[]).length})</summary>
+        <ul>
+          ${(u.files||[]).map(f=>`<li>
+            <div class="update-file-head">
+              <span class="ext-badge ${extClass(f.ext)}">${esc(f.ext||'?')}</span>
+              <a href="${esc(f.url||'#')}" target="_blank" rel="noopener">${esc(f.title||f.filename)}</a>
+              <span class="update-file-cat">${esc(f.category||'')}</span>
+            </div>
+            ${f.summary?`<p class="update-file-desc">${esc(f.summary)}</p>`:''}
+          </li>`).join('')}
+        </ul>
+      </details>
+    </div>`).join('');
+}
+
+function openUpdates(){
+  document.getElementById('updates-overlay').classList.add('open');
+  document.getElementById('updates-modal').classList.add('open');
+}
+function closeUpdates(){
+  document.getElementById('updates-overlay').classList.remove('open');
+  document.getElementById('updates-modal').classList.remove('open');
+}
+
 // ── Events ────────────────────────────────────────────────────────────
 let st;
 document.getElementById('search-input').addEventListener('input',e=>{
@@ -742,10 +855,15 @@ document.querySelectorAll('.chart-mode-btn').forEach(btn=>btn.addEventListener('
   btn.classList.add('active');renderChart(applyFilters());
 }));
 window.addEventListener('resize',()=>{if(state.chartOpen)renderChart(applyFilters());});
+document.getElementById('updates-btn').addEventListener('click',openUpdates);
+document.getElementById('updates-close').addEventListener('click',closeUpdates);
+document.getElementById('updates-overlay').addEventListener('click',closeUpdates);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeUpdates();});
 
 // ── Init ──────────────────────────────────────────────────────────────
 buildCatList();
 updateAll();
+renderUpdates();
 </script>
 </body>
 </html>"""
@@ -757,8 +875,9 @@ updateAll();
 
 def main():
     parser = argparse.ArgumentParser(description="Genera docs/index.html para GitHub Pages")
-    parser.add_argument("--output", default=str(OUTPUT_FILE))
-    parser.add_argument("--db",     default=str(DB_FILE))
+    parser.add_argument("--output",  default=str(OUTPUT_FILE))
+    parser.add_argument("--db",      default=str(DB_FILE))
+    parser.add_argument("--updates", default=str(UPDATES_DIR))
     args = parser.parse_args()
 
     db_path = Path(args.db)
@@ -770,18 +889,21 @@ def main():
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
     records      = load_records(db_path)
+    updates      = load_updates(Path(args.updates))
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
     data_json    = json.dumps(records, ensure_ascii=False, separators=(",", ":"))
+    updates_json = json.dumps(updates, ensure_ascii=False, separators=(",", ":"))
 
     html = (
         TEMPLATE
-        .replace("/*INJECT_DATA*/[]", data_json)
-        .replace("/*GENERATED_AT*/",  generated_at)
+        .replace("/*INJECT_DATA*/[]",    data_json)
+        .replace("/*INJECT_UPDATES*/[]", updates_json)
+        .replace("/*GENERATED_AT*/",     generated_at)
     )
 
     out_path.write_text(html, encoding="utf-8")
     size_kb = out_path.stat().st_size / 1024
-    print(f"Generado: {out_path}  ({len(records)} registros, {size_kb:.1f} KB)")
+    print(f"Generado: {out_path}  ({len(records)} registros, {len(updates)} actualizaciones, {size_kb:.1f} KB)")
 
 
 if __name__ == "__main__":

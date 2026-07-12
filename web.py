@@ -45,6 +45,54 @@ def load_records(db_path: Path) -> list[dict]:
     return records
 
 
+YEAR_THRESHOLD = 2020
+HISTORIC_KEY   = "historico"
+HISTORIC_LABEL = "Antes de 2020"
+
+
+def bucket_key(date_published: str) -> str:
+    """Año como clave de bucket si es >= YEAR_THRESHOLD; si no (o fecha inválida/vacía), 'historico'."""
+    year_str = (date_published or "")[:4]
+    if year_str.isdigit() and int(year_str) >= YEAR_THRESHOLD:
+        return year_str
+    return HISTORIC_KEY
+
+
+def group_by_year(records: list[dict]) -> dict[str, list[dict]]:
+    buckets: dict[str, list[dict]] = {}
+    for r in records:
+        buckets.setdefault(bucket_key(r["date_published"]), []).append(r)
+    for rows in buckets.values():
+        rows.sort(key=lambda r: r["date_published"], reverse=True)
+    return buckets
+
+
+def build_meta(records: list[dict], buckets: dict[str, list[dict]]) -> dict:
+    """Agregados livianos (totales, categorías, buckets disponibles) independientes de qué años cargó el cliente."""
+    categories: dict[str, int] = {}
+    for r in records:
+        categories[r["category"]] = categories.get(r["category"], 0) + 1
+    year_keys = sorted((k for k in buckets if k != HISTORIC_KEY), reverse=True)
+    years = [{"key": k, "label": k, "count": len(buckets[k])} for k in year_keys]
+    if HISTORIC_KEY in buckets:
+        years.append({"key": HISTORIC_KEY, "label": HISTORIC_LABEL, "count": len(buckets[HISTORIC_KEY])})
+    return {"total": len(records), "categories": categories, "years": years}
+
+
+def write_year_files(buckets: dict[str, list[dict]], data_dir: Path) -> None:
+    """Escribe docs/data/<key>.json por bucket y limpia archivos de buckets que ya no existen."""
+    data_dir.mkdir(parents=True, exist_ok=True)
+    current = {f"{key}.json" for key in buckets}
+    for stale in data_dir.glob("*.json"):
+        if stale.name not in current:
+            stale.unlink()
+    for key, rows in buckets.items():
+        (data_dir / f"{key}.json").write_text(
+            json.dumps(rows, ensure_ascii=False, separators=(",", ":")),
+            encoding="utf-8",
+        )
+
+
 def load_updates(updates_dir: Path) -> list[dict]:
     """Carga db/updates/*.json (resúmenes de cada actualización), más reciente primero."""
     updates = []
@@ -425,6 +473,21 @@ mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; bord
 #empty .empty-icon { font-size: 36px; opacity: 0.3; }
 #empty p { font-size: 14px; }
 #empty small { font-size: 12px; color: var(--text-subtle); }
+/* lazy-load sentinel & indicators */
+#scroll-sentinel {
+  display: flex; align-items: center; justify-content: center; padding: 14px;
+  font-size: 12px; color: var(--text-subtle); opacity: 0; transition: opacity 150ms; pointer-events: none;
+}
+#scroll-sentinel.show { opacity: 1; }
+#scroll-sentinel.done { display: none; }
+#load-indicator { display: none; align-items: center; gap: 6px; font-size: 11px; color: var(--accent); white-space: nowrap; }
+#load-indicator.show { display: flex; }
+#load-indicator .spin {
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid var(--brand-border); border-top-color: var(--accent);
+  animation: spin 700ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -513,6 +576,7 @@ mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; bord
 
     <div id="topbar">
       <span id="result-count">Mostrando <strong id="count-shown">0</strong> de <span id="count-total">0</span></span>
+      <span id="load-indicator"><span class="spin"></span>Cargando años anteriores…</span>
       <div class="tb-sep"></div>
       <div id="active-filters-bar"></div>
       <div class="sort-group">
@@ -554,6 +618,7 @@ mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; bord
         </thead>
         <tbody id="tbody"></tbody>
       </table>
+      <div id="scroll-sentinel">Cargando más documentos…</div>
       <div id="empty">
         <div class="empty-icon">📂</div>
         <p>No se encontraron documentos</p>
@@ -565,11 +630,65 @@ mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; bord
 </div>
 
 <script>
-window.__DATA__ = /*INJECT_DATA*/[];
+window.__DATA__ = [];
+window.__META__ = /*INJECT_META*/{};
 window.__UPDATES__ = /*INJECT_UPDATES*/[];
 
 // ── State ─────────────────────────────────────────────────────────────
 const state = { query:'', exts:new Set(), cats:new Set(), src:'', sort:'date', dir:-1, chartOpen:false, chartMode:'year' };
+const loadState = { loadedKeys:new Set(), allLoaded:false, loading:false };
+
+// ── Lazy year loading ────────────────────────────────────────────────
+function needsFullData() {
+  return !!(state.query || state.exts.size || state.cats.size || state.src || state.sort!=='date' || state.chartOpen);
+}
+async function fetchYear(key) {
+  if(loadState.loadedKeys.has(key)) return;
+  loadState.loadedKeys.add(key);
+  try {
+    const res = await fetch('data/'+key+'.json');
+    const rows = await res.json();
+    window.__DATA__.push(...rows);
+  } catch(e) {
+    loadState.loadedKeys.delete(key);
+    console.error('No se pudo cargar data/'+key+'.json', e);
+  }
+}
+function nextPendingKey() {
+  const years = (window.__META__.years||[]);
+  return years.find(y=>!loadState.loadedKeys.has(y.key));
+}
+async function loadNextYear() {
+  const next = nextPendingKey();
+  if(!next) { loadState.allLoaded = true; return false; }
+  loadState.loading = true;
+  setLoadIndicator(true);
+  await fetchYear(next.key);
+  if(!nextPendingKey()) loadState.allLoaded = true;
+  loadState.loading = false;
+  setLoadIndicator(false);
+  return true;
+}
+async function loadAll() {
+  if(loadState.allLoaded || loadState.loading) return;
+  loadState.loading = true;
+  setLoadIndicator(true);
+  const pending = (window.__META__.years||[]).filter(y=>!loadState.loadedKeys.has(y.key));
+  await Promise.allSettled(pending.map(y=>fetchYear(y.key).then(()=>updateAll())));
+  loadState.allLoaded = true;
+  loadState.loading = false;
+  setLoadIndicator(false);
+  updateAll();
+}
+function setLoadIndicator(on) {
+  document.getElementById('load-indicator').classList.toggle('show', !!on);
+  const sentinel = document.getElementById('scroll-sentinel');
+  sentinel.classList.toggle('show', !!on && !needsFullData());
+  if(loadState.allLoaded) {
+    sentinel.classList.add('done');
+    if(typeof sentinelObserver!=='undefined') sentinelObserver.disconnect();
+  }
+}
 
 // ── Utils ─────────────────────────────────────────────────────────────
 function esc(s) {
@@ -748,15 +867,17 @@ function renderActiveFilters() {
   document.getElementById('active-filters-bar').innerHTML=pills.join('');
 }
 
-function updateAll(){render();renderActiveFilters();}
+function updateAll(){
+  if(needsFullData() && !loadState.allLoaded && !loadState.loading) loadAll();
+  render();renderActiveFilters();
+}
 
 function buildCatList() {
-  const counts={};
-  window.__DATA__.forEach(r=>{const c=r.category||'';counts[c]=(counts[c]||0)+1;});
+  const counts=window.__META__.categories||{};
   const cats=Object.entries(counts).sort((a,b)=>b[1]-a[1]||(a[0]||'zzz').localeCompare(b[0]||'zzz','es'));
-  document.getElementById('stat-total').textContent=window.__DATA__.length;
+  document.getElementById('stat-total').textContent=window.__META__.total||0;
   document.getElementById('stat-cats').textContent=Object.keys(counts).length;
-  document.getElementById('count-total').textContent=window.__DATA__.length;
+  document.getElementById('count-total').textContent=window.__META__.total||0;
   document.getElementById('cat-list').innerHTML=cats.map(([c,n])=>`
     <div class="cat-item" data-cat="${esc(c)}">
       <div class="cat-check">✓</div>
@@ -866,6 +987,7 @@ document.getElementById('chart-toggle-btn').addEventListener('click',()=>{
   const btn=document.getElementById('chart-toggle-btn');
   btn.classList.toggle('active',state.chartOpen);
   btn.textContent=state.chartOpen?'▼ Gráfico':'▲ Gráfico';
+  if(state.chartOpen && !loadState.allLoaded && !loadState.loading) loadAll();
   if(state.chartOpen) renderChart(applyFilters());
 });
 document.querySelectorAll('.chart-mode-btn').forEach(btn=>btn.addEventListener('click',()=>{
@@ -896,8 +1018,16 @@ function setSidebarCollapsed(collapsed) {
 const savedSidebarState=localStorage.getItem('ursec-sidebar-collapsed');
 setSidebarCollapsed(savedSidebarState===null?true:savedSidebarState==='1');
 buildCatList();
-updateAll();
 renderUpdates();
+
+const sentinelObserver=new IntersectionObserver(entries=>{
+  if(!entries[0].isIntersecting) return;
+  if(needsFullData()||loadState.allLoaded||loadState.loading) return;
+  loadNextYear().then(updateAll);
+},{root:document.getElementById('table-wrap'),rootMargin:'200px'});
+sentinelObserver.observe(document.getElementById('scroll-sentinel'));
+
+loadNextYear().then(updateAll);
 </script>
 </body>
 </html>"""
@@ -925,19 +1055,29 @@ def main():
     records      = load_records(db_path)
     updates      = load_updates(Path(args.updates))
     generated_at = datetime.now().strftime("%Y-%m-%d %H:%M")
-    data_json    = json.dumps(records, ensure_ascii=False, separators=(",", ":"))
+
+    buckets  = group_by_year(records)
+    data_dir = out_path.parent / "data"
+    write_year_files(buckets, data_dir)
+    meta      = build_meta(records, buckets)
+    meta_json = json.dumps(meta, ensure_ascii=False, separators=(",", ":"))
+
     updates_json = json.dumps(updates, ensure_ascii=False, separators=(",", ":"))
 
     html = (
         TEMPLATE
-        .replace("/*INJECT_DATA*/[]",    data_json)
+        .replace("/*INJECT_META*/{}",    meta_json)
         .replace("/*INJECT_UPDATES*/[]", updates_json)
         .replace("/*GENERATED_AT*/",     generated_at)
     )
 
     out_path.write_text(html, encoding="utf-8")
-    size_kb = out_path.stat().st_size / 1024
-    print(f"Generado: {out_path}  ({len(records)} registros, {len(updates)} actualizaciones, {size_kb:.1f} KB)")
+    size_kb      = out_path.stat().st_size / 1024
+    data_kb      = sum(f.stat().st_size for f in data_dir.glob("*.json")) / 1024
+    bucket_desc  = ", ".join(f"{y['key']}:{y['count']}" for y in meta["years"])
+    print(f"Generado: {out_path}  ({size_kb:.1f} KB)")
+    print(f"  {len(records)} registros en {len(buckets)} bloques ({bucket_desc}) -> {data_dir}/ ({data_kb:.1f} KB)")
+    print(f"  {len(updates)} actualizaciones")
 
 
 if __name__ == "__main__":

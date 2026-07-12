@@ -197,13 +197,30 @@ html, body {
 /* ── Layout ───────────────────────────────────────────────────────── */
 #layout { display: flex; height: 100vh; padding-top: var(--header-h); }
 
+/* ── Sidebar toggle ───────────────────────────────────────────────── */
+#sidebar-toggle {
+  position: fixed; top: calc(var(--header-h) + 14px); left: var(--sidebar-w);
+  transform: translateX(-50%);
+  width: 22px; height: 22px; border-radius: 50%; padding: 0;
+  background: var(--surface); border: 1px solid var(--border-mid);
+  color: var(--text-muted); cursor: pointer; z-index: 50; font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; line-height: 1;
+  transition: left var(--transition), background var(--transition), color var(--transition), border-color var(--transition);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+#sidebar-toggle:hover { color: var(--accent); border-color: var(--accent); }
+#layout.sidebar-collapsed #sidebar-toggle { left: 0; }
+
 /* ── Sidebar ──────────────────────────────────────────────────────── */
 #sidebar {
   width: var(--sidebar-w); min-width: var(--sidebar-w);
   height: 100%; background: var(--surface);
   border-right: 1px solid var(--border);
   display: flex; flex-direction: column; overflow: hidden;
+  transition: width var(--transition), min-width var(--transition);
 }
+#layout.sidebar-collapsed #sidebar { width: 0; min-width: 0; border-right-color: transparent; }
 #sidebar-body {
   flex: 1; overflow-y: auto; padding: 14px 12px;
   display: flex; flex-direction: column; gap: 16px;
@@ -442,7 +459,9 @@ mark { background: var(--mark-bg); color: var(--mark-text); padding: 0 1px; bord
 </div>
 
 <!-- Layout -->
-<div id="layout">
+<div id="layout" class="sidebar-collapsed">
+
+  <button id="sidebar-toggle" aria-label="Mostrar/ocultar barra lateral" aria-expanded="false" title="Mostrar/ocultar barra lateral">›</button>
 
   <!-- Sidebar -->
   <aside id="sidebar">
@@ -855,12 +874,27 @@ document.querySelectorAll('.chart-mode-btn').forEach(btn=>btn.addEventListener('
   btn.classList.add('active');renderChart(applyFilters());
 }));
 window.addEventListener('resize',()=>{if(state.chartOpen)renderChart(applyFilters());});
+document.getElementById('sidebar').addEventListener('transitionend',e=>{
+  if(e.propertyName==='width'&&state.chartOpen) renderChart(applyFilters());
+});
+document.getElementById('sidebar-toggle').addEventListener('click',()=>{
+  setSidebarCollapsed(!document.getElementById('layout').classList.contains('sidebar-collapsed'));
+});
 document.getElementById('updates-btn').addEventListener('click',openUpdates);
 document.getElementById('updates-close').addEventListener('click',closeUpdates);
 document.getElementById('updates-overlay').addEventListener('click',closeUpdates);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeUpdates();});
 
 // ── Init ──────────────────────────────────────────────────────────────
+function setSidebarCollapsed(collapsed) {
+  document.getElementById('layout').classList.toggle('sidebar-collapsed',collapsed);
+  const btn=document.getElementById('sidebar-toggle');
+  btn.textContent=collapsed?'›':'‹';
+  btn.setAttribute('aria-expanded',String(!collapsed));
+  localStorage.setItem('ursec-sidebar-collapsed',collapsed?'1':'0');
+}
+const savedSidebarState=localStorage.getItem('ursec-sidebar-collapsed');
+setSidebarCollapsed(savedSidebarState===null?true:savedSidebarState==='1');
 buildCatList();
 updateAll();
 renderUpdates();

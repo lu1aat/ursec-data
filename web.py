@@ -210,7 +210,7 @@ html, body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 #sidebar-toggle:hover { color: var(--accent); border-color: var(--accent); }
-#layout.sidebar-collapsed #sidebar-toggle { left: 0; }
+#layout.sidebar-collapsed #sidebar-toggle { left: 14px; }
 
 /* ── Sidebar ──────────────────────────────────────────────────────── */
 #sidebar {

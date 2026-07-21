@@ -42,6 +42,7 @@ https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convo
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-parcial-del-servicio-radiodifusion-comercial-dance-95-del
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-parcial-del-servicio-radiodifusion-fm-del-903-mhz
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-parcial-del-servicio-television-canal-3-colonia
+https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-parcial-del-servicio-television-canal-4-montecarlo
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-parcial-del-servicio-television-para-abonados-fray-bentos
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-parcial-del-servicio-television-para-abonados-monte
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-parcial-del-servicio-television-para-abonados-nuevo-siglo
@@ -62,6 +63,7 @@ https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convo
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-total-del-servicio-radiodifusion-encuentro-fm-localidad
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-total-del-servicio-radiodifusion-fm-rosario-899-localidad
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-total-del-servicio-radiodifusion-ley-fm-1067
+https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-total-del-servicio-television-canal-12-fray-bentos
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-total-del-servicio-television-cxb-44-canal-8-rosario
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-total-del-servicio-television-para-abonados-cable-video
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/comunicacion/convocatorias/transferencia-total-del-servicio-television-para-abonados-cable-vision
@@ -2331,6 +2333,7 @@ https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/norm
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/normativa/resolucion-n-157023-jubilacion-luis-lemos-corregida-resolucion-ursec-n
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/normativa/resolucion-n-157024-desestimar-recurso-revocacion-interpuesto-tv-cable-san
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/normativa/resolucion-n-157025-renovacion-permisos-anuales-satelites-geoestacionarios
+https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/normativa/resolucion-n-157026-nuevos-valores-tasa-financiamiento-del-servicio-postal
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/normativa/resolucion-n-158020-new-skies-satellites-bv
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/normativa/resolucion-n-158021-incautacion-sancion-economica-decomiso
 https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/institucional/normativa/resolucion-n-158022-aprobar-pliego-particular-condiciones-sus-anexos

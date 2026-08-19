@@ -1,0 +1,719 @@
+{
+  "date": "2026-08-19",
+  "count": 89,
+  "summary": "Esta actualización incorpora 89 archivos nuevos: 12 planillas de nóminas periódicas de URSEC (satélites geoestacionarios, radioaficionados, distintivos especiales, operadores móvil aeronáutico/marítimo, estaciones a bordo de aeronaves y banda ciudadana, todas a julio de 2026) y 77 resoluciones administrativas, la mayoría dictadas entre abril y julio de 2026. Entre las resoluciones del Directorio destacan la Resolución 186/2026, que aprueba el Presupuesto de URSEC para 2027 con un superávit proyectado de $11,5 millones; la Resolución 171/2026, que sanciona a SAETA (Canal 10) con una multa de 6 UR por exceso publicitario; la Resolución 162/2026, que revoca por prescripción una multa de 27 UR a TNU Canal 5; la Resolución 170/2026, que clausura definitivamente la emisora clandestina \"Entre Nosotros FM\" de Paysandú; y la Resolución 173/2026, que ordena el decomiso de un transmisor artesanal utilizado sin autorización en Canelones. También se registran varias declaraciones de deuda incobrable por utilización de frecuencias (Fidelis Seguridad, Héctor B. Aguiñagalde, Citrícola Salteña, entre otros), tres habilitaciones de licencia clase B para transmisión de datos, el otorgamiento de una nueva licencia postal a Rutas de Oro SRL y el pago a Rentas Generales de los vencimientos 2026 de la subasta de espectro 3,5 GHz por parte de ANTEL, Telefónica y A.M. Wireless. El grueso restante son resoluciones del Departamento de Administración del Espectro (numeradas 50 a 97): altas, bajas y confirmaciones de autorizaciones de radiocomunicaciones de uso propio y radioalarmas para empresas y particulares, inspecciones de estaciones a bordo de embarcaciones y aeronaves previas a la emisión de licencias, designación de sedes y funcionarios para los exámenes mensuales de radioaficionados, y asignaciones de distintivos de llamada e identidades MMSI. Las planillas ODS/XLSX actualizan los padrones y registros vigentes de cada servicio (satelital, radioaficionados, radiocomunicaciones móviles y banda ciudadana) a la fecha de publicación.",
+  "files": [
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Vigentes%20Redes%20Satelitales%20Julio%202026.pdf",
+      "filename": "Nomina Vigentes Redes Satelitales Julio 2026.pdf",
+      "title": "NÓMINA DE PERMISOS ANUALES DE SATÉLITES GEOESTACIONARIOS PDF",
+      "category": "Satélites comerciales",
+      "ext": "pdf",
+      "summary": "Nómina de permisos anuales vigentes de satélites geoestacionarios (HISPASAT, TELESAT CANADA, INTELSAT, INMARSAT, ARSAT, SATMEX, EMBRATEL, etc., 40 filas) y de redes no geoestacionarias autorizadas (Iridium, Kuiper, OneWeb, Starlink), con posición orbital, titular, bandas y vencimiento de cada permiso a julio de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Vigentes%20Redes%20Satelitales%20Julio%202026.ods",
+      "filename": "Nomina Vigentes Redes Satelitales Julio 2026.ods",
+      "title": "NÓMINA DE PERMISOS ANUALES DE SATÉLITES GEOESTACIONARIOS ODT",
+      "category": "Satélites comerciales",
+      "ext": "ods",
+      "summary": "Versión en hoja de cálculo de la nómina de permisos anuales de satélites geoestacionarios y redes no geoestacionarias (1 hoja, 40 filas)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Distintivo%20Especial%20Julio%202026.pdf",
+      "filename": "Nomina Distintivo Especial Julio 2026.pdf",
+      "title": "Listado de Distintivos Especiales asignados a Radioaficionados en pdf Julio 2026",
+      "category": "Radioaficionados",
+      "ext": "pdf",
+      "summary": "Listado de distintivos de llamada especiales asignados a radioaficionados uruguayos, con apellidos/razón social, fecha de vencimiento y período de validez o actividad (concursos, eventos) de cada distintivo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Distintivo%20Especial%20Julio%202026.ods",
+      "filename": "Nomina Distintivo Especial Julio 2026.ods",
+      "title": "Listado de Distintivos Especiales asignados a Radioaficionados en ods Julio 2026",
+      "category": "Radioaficionados",
+      "ext": "ods",
+      "summary": "Versión en hoja de cálculo del listado de distintivos especiales asignados a radioaficionados (1 hoja, 299 filas)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20CX%20Vigentes%20Julio%202026.pdf",
+      "filename": "Nomina CX Vigentes Julio 2026.pdf",
+      "title": "Registro de radioaficionados a Julio de 2026 en pdf",
+      "category": "Radioaficionados",
+      "ext": "pdf",
+      "summary": "Registro de radioaficionados vigentes en Uruguay (prefijo CX), con distintivo de llamada, tipo de permiso, apellidos/nombres, categoría (Inicial/General/Superior) y fecha de vencimiento."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20CX%20Vigentes%20Julio%202026.ods",
+      "filename": "Nomina CX Vigentes Julio 2026.ods",
+      "title": "Registro de radioaficionados a Julio de 2026 en ods",
+      "category": "Radioaficionados",
+      "ext": "ods",
+      "summary": "Versión en hoja de cálculo del registro de radioaficionados vigentes (1 hoja, 1360 filas)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Vigentes%20Radio%20operadores%20Julio%202026.pdf",
+      "filename": "Nomina Vigentes Radio operadores Julio 2026.pdf",
+      "title": "Certificados de operadores de móvil aeronáutico y móvil marítimo pdf Julio 2026",
+      "category": "Radiocomunicaciones",
+      "ext": "pdf",
+      "summary": "Nómina de certificados vigentes de operadores de estaciones en los servicios móvil aeronáutico (radiotelefonista general/restringido) y móvil marítimo (SMSSM general, corto alcance, radioelectrónico), con nacionalidad y vencimiento."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Vigentes%20Radio%20operadores%20Julio%202026.ods",
+      "filename": "Nomina Vigentes Radio operadores Julio 2026.ods",
+      "title": "Certificados de operadores de móvil aeronáutico y móvil marítimo ods Julio 2026",
+      "category": "Radiocomunicaciones",
+      "ext": "ods",
+      "summary": "Versión en hoja de cálculo de la nómina de certificados de operadores móvil aeronáutico y móvil marítimo (1 hoja, 159 filas)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Aeronaves%20vigentes%20Julio%202026.pdf",
+      "filename": "Nomina Aeronaves vigentes Julio 2026.pdf",
+      "title": "Estaciones a bordo de aeronaves Pdf Julio 2026",
+      "category": "Servicio móvil aeronáutico",
+      "ext": "pdf",
+      "summary": "Listado de estaciones radioeléctricas a bordo de aeronaves con permiso vigente, con distintivo de llamada, fabricante, modelo, tipo de servicio (privado, deportivo) y titular."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Aeronaves%20vigentes%20Julio%202026.ods",
+      "filename": "Nomina Aeronaves vigentes Julio 2026.ods",
+      "title": "Estaciones a bordo de aeronaves ods Julio 2026",
+      "category": "Servicio móvil aeronáutico",
+      "ext": "ods",
+      "summary": "Versión en hoja de cálculo del listado de estaciones a bordo de aeronaves (1 hoja)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Vigentes%20Banda%20Ciudadana%20Julio%202026.pdf",
+      "filename": "Nomina Vigentes Banda Ciudadana Julio 2026.pdf",
+      "title": "Listado de estaciones de banda ciudadana pdf Julio 2026",
+      "category": "Banda ciudadana",
+      "ext": "pdf",
+      "summary": "Listado de estaciones de banda ciudadana (CB) autorizadas y vigentes a julio de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/Nomina%20Vigentes%20Banda%20Ciudadana%20Julio%202026.ods",
+      "filename": "Nomina Vigentes Banda Ciudadana Julio 2026.ods",
+      "title": "Listado de estaciones de banda ciudadana ods Julio 2026",
+      "category": "Banda ciudadana",
+      "ext": "ods",
+      "summary": "Versión en hoja de cálculo del listado de estaciones de banda ciudadana vigentes (1 hoja)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/RESOLUCI%C3%93N%20186%202026.pdf",
+      "filename": "RESOLUCIÓN 186 2026.pdf",
+      "title": "Resolución 186/2026 - Aprobar el Proyecto de Presupuesto Operativo, de Operaciones Financieras y de Inversiones de URSEC 2027",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 186/2026: aprueba el Proyecto de Presupuesto Operativo, de Operaciones Financieras y de Inversiones de URSEC para el ejercicio 2027, con recursos por $1.251.704.729, presupuesto operativo de $1.218.501.491 y un superávit proyectado de $11.484.715; se remite al Tribunal de Cuentas y a OPP."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/185_2026-71-1-0000448-Permisos_anuales_HISPASAT_Y_AMAZONAS_NEXUS.pdf",
+      "filename": "185_2026-71-1-0000448-Permisos_anuales_HISPASAT_Y_AMAZONAS_NEXUS.pdf",
+      "title": "Resolución 185/2026 - Renovación permisos anuales a los satélites geoestacionarios detallados a continuación",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 185/2026: extiende hasta el 30/6/2027 los permisos anuales de los satélites geoestacionarios \"HISPASAT 30W-6\" y \"AMAZONAS NEXUS\" de la red de HISPASAT S.A., por falta de comunicación de no renovación; fija un pago de USD 4.000 por los satélites adicionales."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/170_2018-2-9-0001185_Clausura_Entre_Nosotros_FM.pdf",
+      "filename": "170_2018-2-9-0001185_Clausura_Entre_Nosotros_FM.pdf",
+      "title": "Resolución 170/2026 - Clausura definitiva de la emisora “Entre Nosotros FM\"",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 170/2026: dispone la clausura definitiva de la emisora \"Entre Nosotros FM\" (94.5 MHz, Paysandú), operada sin autorización por María Isabel Urzuza, y ordena la destrucción del transmisor artesanal incautado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/171_2024-71-1-0000779_SAETA_SANCION.pdf",
+      "filename": "171_2024-71-1-0000779_SAETA_SANCION.pdf",
+      "title": "Resolución 171/2026 - Sanción de multa a Canal 10",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 171/2026: impone a SAETA (Canal 10) una multa de 6 UR por exceder en 46 segundos el máximo de tanda publicitaria permitido en tres fechas de 2023, rechazando el argumento de que la derogación posterior de la norma exime la infracción."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/172_-_2026-71-1-0000447_renovacion_lienciamiento_ms_365%20%281%29.pdf",
+      "filename": "172_-_2026-71-1-0000447_renovacion_lienciamiento_ms_365 (1).pdf",
+      "title": "Resolución 172/2026 - Adjudicación de Compra Directa Ampliada 112/2026",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 172/2026: adjudica a Milatix S.A. (Intec Asociados) la Compra Directa Ampliada 112/2026 para renovar licencias Office 365 y Veeam Backup (60 Exchange Online, 100 M365 Business Standard, 160 Veeam Backup), por un total de USD 28.695,37 IVA incluido."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/173_-_2021-71-1-0000092_decomiso_transmisor.pdf",
+      "filename": "173_-_2021-71-1-0000092_decomiso_transmisor.pdf",
+      "title": "Resolución 173/2026 - Decomiso definitivo de un transmisor artesanal",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 173/2026: dispone el decomiso definitivo y destrucción de un transmisor artesanal de ~30W usado sin autorización en 99.9 MHz por la Radio Comunitaria de Costa Azul Nuevo (Canelones), a cargo de Magdalena Volpi, tras rechazar sus descargos por falta de permisos."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/174_2021-71-1-0000653_incobrable_deuda_Marcelo_Olivera.pdf",
+      "filename": "174_2021-71-1-0000653_incobrable_deuda_Marcelo_Olivera.pdf",
+      "title": "Resolución 174/2026 - Declarar incobrable a los efectos contables la deuda del Sr. Marcelo de Olivera",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 174/2026: declara incobrable a efectos contables la deuda de 5 UR de Marcelo de Olivera (multa por transmisión no autorizada de \"Impacto FM\" en Bella Unión), tras agotarse las gestiones de cobro."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/176_2022-71-1-0000671_Incobrable_Fidelis_Seguridad.pdf",
+      "filename": "176_2022-71-1-0000671_Incobrable_Fidelis_Seguridad.pdf",
+      "title": "Resolución 176/2026 - Declarar incobrable la deuda a los efectos contables de Fidelis Seguridad Corporativa SRL",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 176/2026: declara incobrable la deuda de $68.033 de Fidelis Seguridad Corporativa S.R.L. por utilización de frecuencia, multas y recargos, tras revocarse en 2024 su autorización de radiocomunicaciones y agotarse las gestiones de cobro."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/177_2022-71-1-0000783_incobrable_Hector.pdf",
+      "filename": "177_2022-71-1-0000783_incobrable_Hector.pdf",
+      "title": "Resolución 177/2026 - Declarar incobrable la deuda a los efectos contables de la empresa Héctor B Aguiñagalde S.A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 177/2026: declara incobrable la deuda de $69.686 de Héctor B. Aguiñagalde S.A. (Salto) por utilización de frecuencias, tras revocarse en 2024 su autorización y no lograrse su notificación ni cobro."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/FORMULARIO%20PARA%20REALIZAR%20LA%20CONSULTA%20P%C3%9ABLICA.pdf",
+      "filename": "FORMULARIO PARA REALIZAR LA CONSULTA PÚBLICA.pdf",
+      "title": "Formulario para la Consulta Pública",
+      "category": "No Vigente",
+      "ext": "pdf",
+      "summary": "Formulario tipo de consulta pública por transferencia parcial (modo sucesión) del servicio de comunicación audiovisual \"Telecable Paysandú\" (Bella Vista S.R.L., expediente 2019-2-9-0000251): cede 37,5% de cuotas sociales de James Alam Whitelaw Rodríguez a María Virginia y James Allen Whitelaw Estrade."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/160_2018-2-9-0001417-_Incobrable_Edgardo_Cigales_-Sur_FM.pdf",
+      "filename": "160_2018-2-9-0001417-_Incobrable_Edgardo_Cigales_-Sur_FM.pdf",
+      "title": "Resolución 160/2026 - Declarar incobrable la deuda a los efectos contables de Edgardo Andrés Cigales",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 160/2026: declara incobrable la deuda de 5 UR de Edgardo Andrés Cigales, multado en 2022 por operar sin autorización la emisora \"Sur FM\" (106.3 MHz, Playa Pascual - San José), por tratarse de un monto por debajo del umbral para acciones judiciales."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/161_2020-2-9-0000744_-Incobrable-_CITRICOLA_SALTE%C3%91A_SA.pdf",
+      "filename": "161_2020-2-9-0000744_-Incobrable-_CITRICOLA_SALTEÑA_SA.pdf",
+      "title": "Resolución 161/2026 - Declarar incobrable la deuda a los efectos contables de Citricola Salteña S A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 161/2026: declara incobrable la deuda concursal de $61.171 de Citrícola Salteña S.A. (\"Caputto\") por utilización de frecuencias, dado que la empresa está en liquidación concursal y perseguir el cobro no resultaría beneficioso para URSEC."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/162_2025-71-1-0000685-_Recurso_rev_y_anulaci%C3%B3n_R_292-2025.pdf",
+      "filename": "162_2025-71-1-0000685-_Recurso_rev_y_anulación_R_292-2025.pdf",
+      "title": "Resolución 162/2026 - Hacer lugar a un recurso del Servicio de Comunicación Audiovisual Nacional",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 162/2026: hace lugar al recurso de revocación de SECAN (TNU Canal 5) contra la Resolución 292/2025 que le impuso una multa de 27 UR por exceso publicitario, por haber operado la prescripción de la infracción según jurisprudencia del TCA."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/163_2026-71-1-0000323-_Misi%C3%B3n_Oficioal_DOHA-Qatar.pdf",
+      "filename": "163_2026-71-1-0000323-_Misión_Oficioal_DOHA-Qatar.pdf",
+      "title": "Resolución 163/2026 - Misión oficial Conferencia de Plenipotenciarios de la Unión Internacional de Telecomunicaciones en Doha",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 163/2026: designa en misión oficial al presidente Gonzalo Balseiro y al jefe de Administración del Espectro Héctor Budé para participar en la Conferencia de Plenipotenciarios de la UIT (PP-26) en Doha, Qatar, entre el 9 y 27 de noviembre de 2026, con viáticos y pasajes a cargo de URSEC."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/164_2026-71-1-0000440-_Misi%C3%B3n_Oficial_Asunci%C3%B3n%20%281%29.pdf",
+      "filename": "164_2026-71-1-0000440-_Misión_Oficial_Asunción (1).pdf",
+      "title": "Resolución 164/2026 - Misión oficial 49° Reunión del Comité Consultivo Permanente I: Telecomunicaciones y TIC",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 164/2026: designa en misión oficial al Ing. Fernando Hernández (jefe de Telecomunicaciones y TIC) para la 49ª Reunión del CCP-I de CITEL en Asunción, Paraguay, del 5 al 12 de setiembre de 2026, con viáticos y pasaje a cargo de URSEC."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/165_2023-71-1-0000574_licencia_b_Alditur.pdf",
+      "filename": "165_2023-71-1-0000574_licencia_b_Alditur.pdf",
+      "title": "Resolución 165/2026 - Habilitación para licencia de clase B Alditur S.A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 165/2026: otorga a Alditur S.A. la habilitación técnica para prestar transmisión de datos alámbrica en Mercedes y Villa Soriano (Soriano), condicionada al pago de 33.000 UI por la Licencia clase B."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/166_2023-71-1-0000087_OLIVERA_ROCHA_GABRIEL_JES%C3%9AS-.pdf",
+      "filename": "166_2023-71-1-0000087_OLIVERA_ROCHA_GABRIEL_JESÚS-.pdf",
+      "title": "Resolución 166/2026 - abilitación para licencia de clase B Gabriel Jesús Olivera",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 166/2026: otorga a Gabriel Jesús Olivera Rocha la habilitación técnica para transmisión de datos alámbrica en La Capuera (Maldonado), condicionada al pago de 2.500 UI por la Licencia clase B."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/167_2023-71-1-0000183HERN%C3%81NDEZ_P%C3%89REZ__GONZALO_ARIEL.pdf",
+      "filename": "167_2023-71-1-0000183HERNÁNDEZ_PÉREZ__GONZALO_ARIEL.pdf",
+      "title": "Resolución 167/2026 - Habilitación para licencia de clase B Gonzalo Ariel Hernández",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 167/2026: otorga a Gonzalo Ariel Hernández Pérez la habilitación técnica para transmisión de datos alámbrica en Mariscala (Lavalleja), condicionada al pago de 1.000 UI por la Licencia clase B."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/168_2026-71-1-0000439_rentas_generales.pdf",
+      "filename": "168_2026-71-1-0000439_rentas_generales.pdf",
+      "title": "Resolución 168/2026 - Transferencia a Rentas Generales",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 168/2026: dispone el pago a Rentas Generales de los vencimientos 2026 de la subasta de espectro 3,5 GHz para servicios móviles IMT: ANTEL debe abonar USD 3.509.437,50, Telefónica Móviles USD 3.506.375 y A.M. Wireless el saldo correspondiente, conforme a las asignaciones de 2023."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/169_2022-71-1-0000862_Hospital_Departamental_de_Maldonado%20%281%29.pdf",
+      "filename": "169_2022-71-1-0000862_Hospital_Departamental_de_Maldonado (1).pdf",
+      "title": "Resolución 169/2026 - Dejar sin efecto la autorización otorgada al Hospital Departamental de Maldonado “Dr. Elbio Rivero”",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 169/2026: deja sin efecto, a pedido del propio Hospital Departamental de Maldonado \"Dr. Elbio Rivero\" (ASSE), su autorización de radiocomunicaciones de uso propio en Lavalleja, Maldonado, Montevideo y Rocha, con reserva de los parámetros técnicos del anexo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/146_2026-71-1-0000333-Reiteraci%C3%B3n_gasto_Vigilancia.pdf",
+      "filename": "146_2026-71-1-0000333-Reiteración_gasto_Vigilancia.pdf",
+      "title": "Resolución 146/2026 - Reiteración del pago de facturas a Nueva Frontera S.A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 146/2026: reitera el pago de $797.726,28 a Nueva Frontera S.A. por servicios de vigilancia de febrero a abril de 2026, pese a la observación del Tribunal de Cuentas por incumplimientos contractuales (personal sin porte de armas), por tratarse de un servicio esencial ya regularizado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/147__2025-71-1-0000580-_Pago_LEVIN_ALVAREZ_FEDERICO.pdf",
+      "filename": "147__2025-71-1-0000580-_Pago_LEVIN_ALVAREZ_FEDERICO.pdf",
+      "title": "Resolución 147/2026 - Cumplimiento de obligaciones de la empresa Levin Alvarez Federico",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 147/2026: declara cumplimiento defectuoso de Levin Álvarez Federico en el control de precios de publicidad electoral (CDA 129/25) por haber presentado un informe contradictorio, dispone pagarle el monto adjudicado con un descuento de multa del 10% ($134.688 IVA incluido) e inscribirlo en el RUPE."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/150_2023-71-1-0001708-_PANDO_CABLEVISION-Lic_clase_B.pdf",
+      "filename": "150_2023-71-1-0001708-_PANDO_CABLEVISION-Lic_clase_B.pdf",
+      "title": "Resolución 150/2026 - Plazo a Pando Cablevision S A S para iniciar la prestación del servicio de transmisión de datos",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 150/2026: otorga a Pando Cablevisión S.A.S. una prórroga de 90 días para iniciar la prestación del servicio de transmisión de datos autorizado en 2024 en Pando (Canelones), por razones de financiamiento de la inversión."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/152_2026-71-1-0000271-_Resoluciones_DAE_abril_2026.pdf",
+      "filename": "152_2026-71-1-0000271-_Resoluciones_DAE_abril_2026.pdf",
+      "title": "Resolución 152/2026 - Publicación resoluciones Departamento Administración del Espectro de la Git",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 152/2026: dispone la publicación en el portal de URSEC de las 18 resoluciones del Departamento de Administración del Espectro dictadas en abril de 2026 (números 50 a 67, sobre Corsair, Tecnovex, Radio Club Uruguayo, Cooperativa 31 de Enero, Gomistar, Pipistrel, entre otras), con sus anexos técnicos reservados."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/153_2026-71-1-0000274-ANTEL_Nota_230-26.pdf",
+      "filename": "153_2026-71-1-0000274-ANTEL_Nota_230-26.pdf",
+      "title": "Resolución 153/2026 - Fechas para Antel",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 153/2026: corrige un error material en la Resolución 110/2026, estableciendo mayo de 2026 (en vez de la fecha original) como fecha de alta de la asignación de canales radioeléctricos de ANTEL."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/154_2026-71-1-0000384-_ANTEL_NOTA_294-26%20%281%29.pdf",
+      "filename": "154_2026-71-1-0000384-_ANTEL_NOTA_294-26 (1).pdf",
+      "title": "Resolución 154/2026 - Alta y baja de canales radioeléctricos Antel",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 154/2026: autoriza a ANTEL altas y bajas de canales radioeléctricos para radioenlaces punto a punto en frecuencias superiores a 1 GHz, con los parámetros técnicos del anexo declarados reservados."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/155_2026-71-1-0000427_Resoluciones_DAE_Junio_2026.pdf",
+      "filename": "155_2026-71-1-0000427_Resoluciones_DAE_Junio_2026.pdf",
+      "title": "Resolución 155/2026 - Publicación resoluciones Departamento Administración del Espectro de la Git",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 155/2026: dispone la publicación de las 14 resoluciones del Departamento de Administración del Espectro dictadas en junio de 2026 (números 84 a 97, sobre Radio Club Paysandú, Fortaleza Seguridad, Radio Club Uruguayo, Frigorífico Modelo, Costa Urbana, Rotor/Max Air/Papantlaca, Leyla, Edificio Verdenia y Casa Militar), con anexos reservados."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/156_2026-71-1-0000401-_Reiteraci%C3%B3n_gasto_Vigilancia_Nueva_Frontera.pdf",
+      "filename": "156_2026-71-1-0000401-_Reiteración_gasto_Vigilancia_Nueva_Frontera.pdf",
+      "title": "Resolución 156/2026 - Reiteración del pago de facturas a Nueva Frontera S.A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 156/2026: reitera el pago de $265.908,76 a Nueva Frontera S.A. por el servicio de vigilancia de mayo de 2026, tras verificar que la empresa restableció la guardia armada según contrato a partir del 15 de junio."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/158_2026-71-1-0000415_RUTAS_DE_ORO.pdf",
+      "filename": "158_2026-71-1-0000415_RUTAS_DE_ORO.pdf",
+      "title": "Resolución 158/2026 - Otorgar licencia postal Rutas de Oro Srl",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 158/2026: otorga a Rutas de Oro SRL la licencia postal OPE169 y su inscripción en el RGPSP para prestar servicios postales locales en localidades de Artigas y Rivera, condicionada al pago de 10.000 UI."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/97%20-%200394%20-%20CASA%20MILITAR%20%28COMITIVA%29.pdf",
+      "filename": "97 - 0394 - CASA MILITAR (COMITIVA).pdf",
+      "title": "RESOLUCIÓN GIT DAE 97 - 0394 - Casa Militar (Comitiva)",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 097/2026: registra la autorización ya otorgada a la Casa Militar para operar un sistema de radiocomunicaciones (864,2375 MHz) durante la visita oficial del presidente de Chile y su comitiva los días 1 y 2 de julio de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/96%20-%200347%20-%20EDIFICIO%20VERDENIA.pdf",
+      "filename": "96 - 0347 - EDIFICIO VERDENIA.pdf",
+      "title": "RESOLUCIÓN GIT DAE 96 - 0347 - Edificio Verdenia",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 096/2026: da de baja, a pedido del propio titular, la autorización de radiocomunicaciones de uso propio y el canal asignado a Edificio Verdenia en Montevideo, a partir del 31 de mayo de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/178_2022-71-1-0001122_sarandi_comunicaciones.pdf",
+      "filename": "178_2022-71-1-0001122_sarandi_comunicaciones.pdf",
+      "title": "Resolución 178/2026 - Autorización de cambio de nombre de fantasía a Sarandi Comunicaciones S.A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución 178/2026: autoriza a Sarandí Comunicaciones S.A. (CXD220, 91.9 MHz, Montevideo) a regularizar el cambio de nombre de fantasía de \"Radio Disney\" a \"FM Like\", que ya venía usando sin autorización, aplicándole una sanción de observación."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/94%20-%204216%20-%20ROTOR%20S.A.S.%2C%20MAX%20AIR%20S.A.%20y%20PAPANTLACA%20S.R.L..pdf",
+      "filename": "94 - 4216 - ROTOR S.A.S., MAX AIR S.A. y PAPANTLACA S.R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 94 - 4216 - Rotor S.A.S., Max Air S.A. y Papantlaca S.R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 094/2026: dispone inspecciones verificativas el 22/6/2026 de las estaciones radioeléctricas a bordo de las aeronaves CXDCH, CXMAS y CXBEJ de Rotor S.A.S., Max Air S.A. y Papantlaca S.R.L., en el Aeropuerto de Carrasco, previas a expedir sus licencias de estación."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/95%20-%204618%20-%20LEYLA%20S.A..pdf",
+      "filename": "95 - 4618 - LEYLA S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 95 - 4618 - Leyla S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 095/2026: dispone la inspección verificativa el 18/6/2026 de la estación radioeléctrica a bordo de la embarcación \"Polarpesca II\" de Leyla S.A. en el Puerto de Montevideo, previa a expedir su licencia de estación."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/93%20-%204765%20-%20RADIO%20CLUB%20URUGUAYO.pdf",
+      "filename": "93 - 4765 - RADIO CLUB URUGUAYO.pdf",
+      "title": "RESOLUCIÓN GIT DAE 93 - 4765 - Radio Club Uruguayo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 093/2026: designa a un funcionario en comisión de servicio para supervisar el Examen Mensual de Radioaficionados de junio de 2026 en la sede del Radio Club Uruguayo (Montevideo, 19 a 20 hs)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/91%20-%200365%20-%20PANDO%20ALARMAS%20S.R.L..pdf",
+      "filename": "91 - 0365 - PANDO ALARMAS S.R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 91 - 0365 - Pando Alarmas S.R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 091/2026: da de baja el sistema de radiocomunicaciones de uso propio de Pando Alarmas S.R.L. en Canelones y consolida en un único acto la conformación vigente de sus sistemas de radioalarmas a partir de junio de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/92%20-%200372%20-%20URUAGRO%20LTDA..pdf",
+      "filename": "92 - 0372 - URUAGRO LTDA..pdf",
+      "title": "RESOLUCIÓN GIT DAE 92 - 0372 - Uruagro Ltda.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 092/2026: da de baja, a pedido del titular, la autorización y los canales radioeléctricos de Uruagro Ltda. en Soriano, a partir del 30 de junio de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/86%20-%204765%20-%20RADIO%20CLUB%20URUGUAYO.pdf",
+      "filename": "86 - 4765 - RADIO CLUB URUGUAYO.pdf",
+      "title": "RESOLUCIÓN GIT DAE 86 - 4765 - Radio Club Uruguayo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 086/2026: autoriza al Radio Club Uruguayo como sede del Examen Mensual de Radioaficionados de junio de 2026, en Simón Bolívar 1195, Montevideo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/87%20-%200297%20-%20FRIGORIFICO%20MODELO%20S.A..pdf",
+      "filename": "87 - 0297 - FRIGORIFICO MODELO S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 87 - 0297 - Frigorífico Modelo S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 087/2026: da de baja la autorización de Frigorífico Modelo S.A. en Florida y confirma su autorización y canal vigentes en Montevideo, a partir del 31 de mayo de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/88%20-%200350%20-%20COSTA%20URBANA%20S.A..pdf",
+      "filename": "88 - 0350 - COSTA URBANA S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 88 - 0350 - Costa Urbana S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 088/2026: da de baja la autorización y el canal (460,275/465,300 MHz, móvil terrestre) de Costa Urbana S.A. en Canelones, a pedido del titular, desde el 30 de junio de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/89%20-%200363%20-%20FORTALEZA%20SEGURIDAD%20S.A.S..pdf",
+      "filename": "89 - 0363 - FORTALEZA SEGURIDAD S.A.S..pdf",
+      "title": "RESOLUCIÓN GIT DAE 67 - 2873 - Gomistar S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 089/2026: reitera la frecuencia y consolida la conformación del sistema de radioalarmas de Fortaleza Seguridad S.A.S. en Paysandú, vigente desde mayo de 2026, según el reporte mensual de estaciones de abonado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/90%20-%20DEPARTAMENTO%20ADMINISTRACION%20DEL%20ESPECTRO.pdf",
+      "filename": "90 - DEPARTAMENTO ADMINISTRACION DEL ESPECTRO.pdf",
+      "title": "RESOLUCIÓN GIT DAE 90 - Departamento Administración Del Espectro",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 090/2026: convoca al taller de capacitación \"Los Servicios Satelitales - Desafíos técnicos y regulatorios de la CMR-27\", dictado por la firma Welchman Keen el 25 y 26 de junio, 14 horas de carga total."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/85%20-%200293%20-%20Fortaleza%20Seguridad%20S.A.S..pdf",
+      "filename": "85 - 0293 - Fortaleza Seguridad S.A.S..pdf",
+      "title": "RESOLUCIÓN GIT DAE 85 - 0293 - Fortaleza Seguridad S.A.S.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 085/2026: reitera la frecuencia y consolida la conformación del sistema de radioalarmas de Fortaleza Seguridad S.A.S. en Paysandú, vigente desde abril de 2026, según el reporte mensual de estaciones de abonado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/83%20-%200305%20-%20ANCAP.pdf",
+      "filename": "83 - 0305 - ANCAP.pdf",
+      "title": "RESOLUCIÓN GIT DAE 83 - 0305 - Ancap",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 083/2026: asigna a ANCAP la identidad MMSI 997701043 para una ayuda a la navegación (AtoN) con transmisor AIS que baliza la boya petrolera de José Ignacio, Maldonado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/79%20-%200289%20-%20PANDO%20ALARMAS%20S.R.L..pdf",
+      "filename": "79 - 0289 - PANDO ALARMAS S.R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 79 - 0289 - Pando Alarmas S.R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 079/2026: reitera la frecuencia y consolida en un único acto la conformación de los sistemas de radiocomunicaciones y radioalarmas de Pando Alarmas S.R.L. en Canelones, vigente desde mayo de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/80%20-%204170%20-%20REMOLCADORES%20Y%20LANCHAS%20S.A..pdf",
+      "filename": "80 - 4170 - REMOLCADORES Y LANCHAS S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 80 - 4170 - Remolcadores y Lanchas S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 080/2026: dispone la inspección verificativa el 28/5/2026 de la estación radioeléctrica a bordo de la embarcación \"VB Caribe\" de Remolcadores y Lanchas S.A. en el Puerto de Montevideo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/81%20-%204433%20-%20LUZ%20MARINA%20S.A..pdf",
+      "filename": "81 - 4433 - LUZ MARINA S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 81 - 4433 - Luz Marina S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 081/2026: dispone la inspección verificativa el 29/5/2026 de la estación radioeléctrica a bordo de la embarcación \"Sea Master\" de Luz Marina S.A. en la Terminal Puerto Capurro."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/82%20-%200338%20-%20DPTO.%20ADMINISTRACION%20DEL%20ESPECTRO%20%20Trabajos%20SRV.pdf",
+      "filename": "82 - 0338 - DPTO. ADMINISTRACION DEL ESPECTRO  Trabajos SRV.pdf",
+      "title": "RESOLUCIÓN GIT DAE 82 - 0338 - Dpto. Administración Del Espectro - Trabajos S.R.V.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 082/2026: organiza la elaboración de cuatro manuales de procedimientos técnicos y administrativos del Departamento (autorizaciones bajo 1 GHz, radioenlaces sobre 1 GHz, estaciones terrenas, certificación de radiooperadores), asignando responsables y un cronograma hasta el 25 de setiembre."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/78%20-%204170%20-%20REMOLCADORES%20Y%20LANCHAS%20S.A..pdf",
+      "filename": "78 - 4170 - REMOLCADORES Y LANCHAS S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 78 - 4170 - Remolcadores y Lanchas S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 078/2026: asigna a la embarcación \"VB Caribe\" (Remolcadores y Lanchas S.A.), reinscripta bajo bandera uruguaya, el distintivo de llamada CXKF y el MMSI 770576209, condicionado a programar el equipamiento e informar a URSEC dentro de 10 días hábiles."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/75%20-%203081%20-%20PIPISTREL%20S.R.L..pdf",
+      "filename": "75 - 3081 - PIPISTREL S.R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 75 - 3081 - Pipistrel S.R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 075/2026: reprograma para el 21/5/2026 la inspección de la estación a bordo de la aeronave CX-NBA, que se trasladó al Aeropuerto Ángel S. Adami, dejando sin efecto la resolución anterior que la fijaba en otro aeródromo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/76%20-%203869%20-%20CREDITOS%20DURAZNO%20S.A..pdf",
+      "filename": "76 - 3869 - CREDITOS DURAZNO S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 76 - 3869 - Creditos Durazno S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 076/2026: dispone la inspección verificativa el 21/5/2026 de la estación radioeléctrica a bordo de la embarcación \"Albamar\" de Créditos Durazno S.A. en la Terminal Puerto Capurro."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/77%20-%203771%20-%20ANIBAL%20PACIFICO%20GUERRA%20GUTIERREZ.pdf",
+      "filename": "77 - 3771 - ANIBAL PACIFICO GUERRA GUTIERREZ.pdf",
+      "title": "RESOLUCIÓN GIT DAE 77 - 3771 - Aníbal Pacifico Guerra Gutierrez",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 077/2026: designa a un funcionario en comisión de servicio a Dolores (Soriano) para inspeccionar el 25/5/2026 la estación a bordo de la embarcación \"Don Elías II\" de Aníbal Pacífico Guerra Gutiérrez, con viáticos y pasajes a cargo de URSEC."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/74%20-%202872%20-%20GOMISTAR%20S.A..pdf",
+      "filename": "74 - 2872 - GOMISTAR S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 74 - 2872 - Gomistar S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 074/2026: dispone la inspección verificativa el 14/5/2026 de la estación a bordo de la embarcación \"Buenos Aires Express\" de Gomistar S.A. en la Terminal Puerto Capurro."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/73%20-%200275%20-%20TELESAT%20CANAD%C3%81.pdf",
+      "filename": "73 - 0275 - TELESAT CANADÁ.pdf",
+      "title": "RESOLUCIÓN GIT DAE 73 - 0275 - Telesat Canadá",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 073/2026: toma nota de la decisión de Telesat Canadá de no renovar el permiso anual del satélite geoestacionario \"Telstar-14R\", que caducaba el 31 de mayo de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/71%20-%203724%20-%20RADIO%20CLUB%20URUGUAYO.pdf",
+      "filename": "71 - 3724 - RADIO CLUB URUGUAYO.pdf",
+      "title": "RESOLUCIÓN GIT DAE 71 - 3724 - Radio Club Uruguayo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 071/2026: designa a un funcionario en comisión de servicio para supervisar el Examen Mensual de Radioaficionados de mayo de 2026 en la sede del Radio Club Uruguayo (Montevideo, 19 a 20 hs)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/72%20-%202723%20-%20SILVIO%20BARBANO%20LESCANO.pdf",
+      "filename": "72 - 2723 - SILVIO BARBANO LESCANO.pdf",
+      "title": "RESOLUCIÓN GIT DAE 72 - 2723 - Silvio Barbano Lescano",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 072/2026: designa a un funcionario en comisión de servicio a Punta del Este para inspeccionar el 13/5/2026 la estación a bordo de la embarcación \"Maui\" de Silvio Barbano Lescano, con viáticos y pasajes a cargo de URSEC."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/70%20-%203724%20-%20RADIO%20CLUB%20URUGUAYO.pdf",
+      "filename": "70 - 3724 - RADIO CLUB URUGUAYO.pdf",
+      "title": "RESOLUCIÓN GIT DAE 70 - 3724 - Radio Club Uruguayo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 070/2026: autoriza al Radio Club Uruguayo como sede del Examen Mensual de Radioaficionados de mayo de 2026, en Simón Bolívar 1195, Montevideo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/68%20-%200536%20-%20PEDRO%20FACUNDO%20PERADOTTO%20ABREU_0.pdf",
+      "filename": "68 - 0536 - PEDRO FACUNDO PERADOTTO ABREU_0.pdf",
+      "title": "RESOLUCIÓN GIT DAE 68 - 0536 - Pedro Facundo Peradotto Abreu",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 068/2026 relativa a Pedro Facundo Peradotto Abreu: el archivo es un PDF escaneado sin texto extraíble, por lo que no fue posible determinar su contenido específico automáticamente."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/69%20-%202872%20-%20GOMISTAR%20S.A..pdf",
+      "filename": "69 - 2872 - GOMISTAR S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 69 - 2872 - Gomistar S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 069/2026: dispone la inspección verificativa el 6/5/2026 de la estación a bordo de la embarcación \"Buenos Aires Express\" de Gomistar S.A. en la Terminal Puerto Capurro (trámite separado del de la Resolución 074)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/66%20-%203083%20-%20PIPISTREL%20S.%20R.L..pdf",
+      "filename": "66 - 3083 - PIPISTREL S. R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 66 - 3083 - Pipistrel S. R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 066/2026: dispone la inspección verificativa el 29/4/2026 de la estación a bordo de la aeronave CX-WAX de Pipistrel S.R.L. en el Aeropuerto de Carrasco."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/67%20-%202873%20-%20GOMISTAR%20S.A..pdf",
+      "filename": "67 - 2873 - GOMISTAR S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 67 - 2873 - Gomistar S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 067/2026: designa a un funcionario en comisión de servicio a Nueva Palmira (Colonia) para inspeccionar el 28/4/2026 la estación a bordo de la embarcación \"Penguin\" de Gomistar S.A., con viáticos y pasajes a cargo de URSEC."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/65%20-%202855%20-%20OCIUS%20S.R.L..pdf",
+      "filename": "65 - 2855 - OCIUS S.R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 65 - 2855 - Ocius S.R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 065/2026: designa a un funcionario en comisión de servicio a Paysandú para inspeccionar el 29/4/2026 la estación a bordo de la embarcación \"Adela-Mar\" de Ocius S.R.L., con viáticos y pasajes a cargo de URSEC."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/63%20-%203081%20-%20PIPISTREL%20S.R.L..pdf",
+      "filename": "63 - 3081 - PIPISTREL S.R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 63 - 3081 - Pipistrel S.R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 063/2026: designa a un funcionario en comisión de servicio para inspeccionar el 21/5/2026 la estación a bordo de la aeronave CX-NBA de Pipistrel S.R.L. en el Aeródromo Green (Ruta Interbalnearia), luego reprogramada por la Resolución 075."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/64%20-%203003%20-%20RADIO%20CLUB%20URUGUAYO.pdf",
+      "filename": "64 - 3003 - RADIO CLUB URUGUAYO.pdf",
+      "title": "RESOLUCIÓN GIT DAE 64 - 3003 - Radio Club Uruguayo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 064/2026: designa a un funcionario en comisión de servicio para supervisar el Examen Mensual de Radioaficionados de abril de 2026 en la sede del Radio Club Uruguayo (Montevideo, 19 a 20 hs)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-07/62%20-%200204%20-%20FORTALEZA%20SEGURIDAD%20S.A.S..pdf",
+      "filename": "62 - 0204 - FORTALEZA SEGURIDAD S.A.S..pdf",
+      "title": "RESOLUCIÓN GIT DAE 62 - 0204 - Fortaleza Seguridad S.A.S.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 062/2026: da de baja el sistema de uso propio de Fortaleza Seguridad S.A.S. en Paysandú (ya sin operación) y consolida la conformación vigente de su sistema de radioalarmas a partir de marzo de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/59%20-%200223%20-%20AGENCIA%20MARITIMA%20SUR%20S.A..pdf",
+      "filename": "59 - 0223 - AGENCIA MARITIMA SUR S.A..pdf",
+      "title": "Resolución GIT - DAE - 59 - 0223 - Agencia Marítima Sur S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 059/2026: da de baja, a pedido del titular, la autorización de radiocomunicaciones de uso propio y la estación costera de Agencia Marítima Sur S.A. en Montevideo, desde el 30 de abril de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/60%20-%208639%20-%20ALABE%20SERVICIOS%20AEREOS%20S.R.L.%20y%20JORGE%20ANTONIO%20BASSO%20CUROTTO.pdf",
+      "filename": "60 - 8639 - ALABE SERVICIOS AEREOS S.R.L. y JORGE ANTONIO BASSO CUROTTO.pdf",
+      "title": "Resolución GIT - DAE - 60 - 8639 - Alabe Servicios Aéreos S.R.L. y Jorge Antonio Basso Curotto",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 060/2026: dispone la inspección verificativa el 21/4/2026 de las estaciones a bordo de las aeronaves CX-PYB y CX-BID de Alabe Servicios Aéreos S.R.L. y Jorge Antonio Basso Curotto, en el Aeropuerto Ángel S. Adami."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/61%20-%202859-%20OCEANUS%20SHIP%20MANAGMENT%20S.A.S..pdf",
+      "filename": "61 - 2859- OCEANUS SHIP MANAGMENT S.A.S..pdf",
+      "title": "Resolución GIT - DAE - 61 - 2859 - Oceanus Ship Managment S.A.S.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 061/2026: asigna a la embarcación \"Bandurria\", reinscripta bajo bandera uruguaya a nombre de Oceanus Ship Management S.A.S., el distintivo de llamada CXES y el MMSI 770576299 (vencidos previamente bajo su anterior titular Kios S.A.)."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/58%20-%200212%20-%20COOPERATIVA%2031%20DE%20ENERO.pdf",
+      "filename": "58 - 0212 - COOPERATIVA 31 DE ENERO.pdf",
+      "title": "Resolución GIT - DAE - 58 - 0212 - Cooperativa 31 de Enero",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 058/2026: da de baja, a pedido del titular, la autorización y los canales radioeléctricos de la Cooperativa 31 de Enero en Montevideo, desde el 30 de abril de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/56%20-%202947%20-%20RADIO%20CLUB%20URUGUAYO.pdf",
+      "filename": "56 - 2947 - RADIO CLUB URUGUAYO.pdf",
+      "title": "Resolución GIT - DAE - 56 - 2947 - Radio Club Uruguayo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 056/2026: asigna al Radio Club Uruguayo, en carácter excepcional por presentación fuera de plazo, el distintivo especial CX1YOTA para el evento YOTA 2026 (Youngest On The Air) del 17 al 19 de abril, coincidente con el Día Mundial del Radioaficionado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/57%20-%203003%20-%20RADIO%20CLUB%20URUGUAYO.pdf",
+      "filename": "57 - 3003 - RADIO CLUB URUGUAYO.pdf",
+      "title": "Resolución GIT - DAE - 57 - 3003 - Radio Club Uruguayo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 057/2026: autoriza al Radio Club Uruguayo como sede del Examen Mensual de Radioaficionados de abril de 2026, en Simón Bolívar 1195, Montevideo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/53%20-%200193%20-%20SCUOLA%20ITALIANA%20DI%20MONTEVIDEO.pdf",
+      "filename": "53 - 0193 - SCUOLA ITALIANA DI MONTEVIDEO.pdf",
+      "title": "Resolución GIT - DAE - 53 - 0193 - Scuola Italiana di Montevideo",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 053/2026: reasigna a la Scuola Italiana di Montevideo, a partir de mayo de 2026, el canal 467,675 MHz (compartido, móvil terrestre, hasta 3 estaciones móviles en Gral. French 2380), dejando sin efecto el canal 467,800 MHz previamente asignado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/54%20-%200205%20-%20JULIO%20CESAR%20LESTIDO%20SARASOLA.pdf",
+      "filename": "54 - 0205 - JULIO CESAR LESTIDO SARASOLA.pdf",
+      "title": "Resolución GIT - DAE - 54 - 0205 - Julio César Lestido Sarasola",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 054/2026: da de baja, a pedido del titular, la autorización y el canal radioeléctrico de Julio César Lestido Sarasola en Montevideo, desde el 30 de abril de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/55%20-%200140%20-%20ALEJANDRO%20FABIAN%20CABRAL%20MEDINA.pdf",
+      "filename": "55 - 0140 - ALEJANDRO FABIAN CABRAL MEDINA.pdf",
+      "title": "Resolución GIT - DAE - 55 - 0140 - Alejandro Fabián Cabral Medina",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 055/2026: autoriza a Alejandro Fabián Cabral Medina, a partir de mayo de 2026, un nuevo sistema de radiocomunicaciones de uso propio para radiodespacho de taxímetros en Paysandú, con el canal asignado en el anexo."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/51%20-%200152%20-%20TECNOVEX%20S.A..pdf",
+      "filename": "51 - 0152 - TECNOVEX S.A..pdf",
+      "title": "RESOLUCIÓN GIT DAE 51 - 0152 - Tecnovex S.A.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 051/2026: da de baja, a pedido del titular, la autorización y el canal radioeléctrico de Tecnovex S.A. en Paysandú, desde el 31 de marzo de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/52%20-%200231%20-%20TALLER%20DE%20CAPACITACION%20EN%20GIT.pdf",
+      "filename": "52 - 0231 - TALLER DE CAPACITACION EN GIT.pdf",
+      "title": "RESOLUCIÓN GIT DAE 52 - 0231 - Taller de capación en GIT",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 052/2026: convoca al taller \"Nuevas prestaciones en Espectro Visor\" para personal técnico de la Gerencia de Ingeniería en Telecomunicaciones, dictado por TES America el 13 y 14 de abril, 7:30 horas de carga total."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-06/50%20-%200194%20-%20CORSAIR%20S.R.L..pdf",
+      "filename": "50 - 0194 - CORSAIR S.R.L..pdf",
+      "title": "RESOLUCIÓN GIT DAE 50 - 0194 - CORSAIR S.R.L.",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Resolución GIT/DAE 050/2026: da de baja, a pedido del titular, la autorización y el canal 479,375 MHz (fijo y móvil integrados) de Corsair S.R.L. en Canelones, desde el 31 de marzo de 2026."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "date": "2026-08-23",
+  "count": 1,
+  "summary": "Se incorporó una nueva planilla de \"Titularidad de medios\" actualizada al 06/08/2026, publicada por URSEC en la categoría Radiodifusión y TV Abonados. El archivo actualiza el padrón de medios de radiodifusión registrados, con datos de titulares (personas físicas o jurídicas), tipo de empresa, distintivo, frecuencia, integrantes y porcentaje de participación, número de resolución habilitante, y ubicación (departamento/localidad). Incluye además una hoja separada con medios cuyo registro está pendiente de resolución.",
+  "files": [
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/Titularidad%20de%20medios%20portal%2006_08_2026_.xls__0.xlsx",
+      "filename": "Titularidad de medios portal 06_08_2026_.xls__0.xlsx",
+      "title": "Titularidad de medios al 06 08 2026",
+      "category": "Radiodifusión y TV Abonados",
+      "ext": "xlsx",
+      "summary": "Planilla con dos hojas: \"Medios registados ante URSEC\" (1010 filas x 17 columnas), con titular, tipo de empresa, modo, distintivo, frecuencia, nombre de fantasía, integrantes y % de participación, números de resolución y enlaces, departamento y localidad; y \"Medios con registro pendiente\" (40 filas x 9 columnas), con datos similares para medios aún sin resolución de registro."
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "date": "2026-08-29",
+  "count": 16,
+  "summary": "Se incorporaron 16 archivos nuevos: 2 planillas de datos, un documento de agenda institucional y 13 resoluciones de URSEC dictadas entre el 10 de julio y el 5 de agosto de 2026. Las resoluciones abarcan principalmente sanciones de observación a cinco empresas (Emprendimientos de Valor, Seguros Sura, Óptica Florida/Savage, Nueva Compañía \"Vigilia\" y Memory S.A.) por contactar a usuarios inscriptos en el Registro Nacional No Llame (Res. 179 a 183/2026), además de un apercibimiento a la Administración Nacional de Correos por incumplir plazos de entrega (Res. 149/2026). Se destaca la Resolución 184/2026, que dispone el bloqueo electrónico temporal de una quincena de sitios web que retransmitían sin autorización señales de DIRECTV (DSPORTS, Disney Junior, ESPN y ESPN2), y la Resolución 187/2026, que renueva el permiso anual del satélite geoestacionario IS-31 de Intelsat US LLC hasta junio de 2027. También se registran dos clausuras y decomisos de transmisores artesanales no autorizados (Tacuarembó y Dolores), la declaración de dos deudas como incobrables, y la autorización a Sarandí Comunicaciones para el cambio de nombre de fantasía de su emisora de \"Radio Disney\" a \"FM Like\". Las planillas actualizan el padrón de titularidad de medios de SEDICA al 6 de agosto y el registro de solicitudes de bloqueo electrónico a ISP al 24 de agosto de 2026.",
+  "files": [
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/Titularidad%20SEDICA%206_08_2026%20para%20portal_0.xlsx",
+      "filename": "Titularidad SEDICA 6_08_2026 para portal_0.xlsx",
+      "title": "Titularidad de SEDICA al 06 08 2026",
+      "category": "Radiodifusión y TV Abonados",
+      "ext": "xlsx",
+      "summary": "Planilla con 963 filas que detalla la titularidad de servicios de SEDICA al 6 de agosto de 2026: identifica titular (persona física o jurídica), tipo de empresa, distintivo, frecuencia, nombre de fantasía, integrantes societarios y porcentaje de participación, resoluciones vinculadas, y departamento/localidad de cada servicio."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/Registro%20de%20solicitudes%20de%20bloqueos%20al%2024%20de%20agosto%202026.xlsx",
+      "filename": "Registro de solicitudes de bloqueos al 24 de agosto 2026.xlsx",
+      "title": "Registro de solicitudes de bloqueo electrónico temporal a proveedores de internet (ISP)",
+      "category": "",
+      "ext": "xlsx",
+      "summary": "Planilla de seguimiento con 1029 filas que registra las solicitudes de bloqueo electrónico temporal a proveedores de internet (ISP), indicando denunciante, URL o dominio denunciado, plazo de bloqueo en días y enlace a la resolución de URSEC correspondiente, actualizada al 24 de agosto de 2026."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/documentos/publicaciones/Agenda%20Jornada%20Anual%20de%20Regulaci%C3%B3n%202026.docx",
+      "filename": "Agenda Jornada Anual de Regulación 2026.docx",
+      "title": "Agenda del evento",
+      "category": "Guías",
+      "ext": "docx",
+      "summary": "Agenda del evento \"Jornada Anual de Regulación 2026\" de URSEC; el documento extraído no incluye el detalle horario de las actividades."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/188_2021-71-1-0000109_-_Incobrable-Juan_Jos%C3%A9_Launa.pdf",
+      "filename": "188_2021-71-1-0000109_-_Incobrable-Juan_José_Launa.pdf",
+      "title": "Resolución 188/2026 - Declarar incobrable la deuda a los efectos contables de Juan José Launa",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Declara incobrable a los efectos contables la deuda de 10 UR de Juan José Launa, originada en la multa por utilización no autorizada de la frecuencia 106.3 MHz en Las Piedras (Canelones), tras agotarse sin éxito las gestiones de cobro y notificación."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/179_2023-71-1-0000541-_Sanci%C3%B3n_Reg_no_llame-VALOR_SA.pdf",
+      "filename": "179_2023-71-1-0000541-_Sanción_Reg_no_llame-VALOR_SA.pdf",
+      "title": "Resolución 179/2026 - Sanción a Emprendimientos de Valor S.A por incumplimiento del Registro Nacional No Llame",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Impone una sanción de observación a Emprendimientos de Valor S.A. (\"Crédito Valor\") por tres denuncias de contacto a usuarios inscriptos en el Registro Nacional No Llame, en infracción al art. 181 de la Ley 19.996; la empresa reconoció uno de los contactos denunciados."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/180_2023-71-1-0000604-_Sanci%C3%B3n_No_llame-_SEGUROS_SURA.pdf",
+      "filename": "180_2023-71-1-0000604-_Sanción_No_llame-_SEGUROS_SURA.pdf",
+      "title": "Resolución 180/2026 - Sanción a Sura por incumplimiento del Registro Nacional No Llame",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Impone una sanción de observación a Seguros Sura S.A. por un contacto a un usuario del Registro No Llame; la empresa alegó que el contacto fue realizado por un tercero contratado para ofrecer sus productos."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/181_2023-71-1-0000626-_Sanci%C3%B3n_No_llame-_Optica_Florida.pdf",
+      "filename": "181_2023-71-1-0000626-_Sanción_No_llame-_Optica_Florida.pdf",
+      "title": "Resolución 181/2026 - Sanción a Óptica Florida por incumplimiento del Registro Nacional No Llame",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Impone una sanción de observación a Savage S.A. (\"Óptica Florida\") por tres denuncias de contacto a usuarios del Registro No Llame, sin que la empresa evacuara las vistas conferidas."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/182_2023-71-1-0000636-_Sanci%C3%B3n_No_llame-Nueva_Compa%C3%B1%C3%ADa.pdf",
+      "filename": "182_2023-71-1-0000636-_Sanción_No_llame-Nueva_Compañía.pdf",
+      "title": "Resolución 182/2026 - Sanción a Vigilia por incumplimiento del Registro Nacional No Llame",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Impone una sanción de observación a Nueva Compañía - Sistema Asistencial Ltda (\"Vigilia\") por una denuncia de contacto a un usuario del Registro No Llame, sin evacuación de la vista conferida."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/183_2023-71-1-0000838-_Sanci%C3%B3n_No_llame-_MEMORY.pdf",
+      "filename": "183_2023-71-1-0000838-_Sanción_No_llame-_MEMORY.pdf",
+      "title": "Resolución 183/2026 - Sanción a Memory S.A por incumplimiento del Registro Nacional No Llame",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Impone una sanción de observación a Memory S.A. por tres denuncias de contacto a usuarios del Registro No Llame; la empresa no está inscripta en el registro de consulta de altas y bajas ni evacuó las vistas conferidas."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/184_2026-71-1-0000493-_Bloqueo_se%C3%B1ales-DIRECTV.pdf",
+      "filename": "184_2026-71-1-0000493-_Bloqueo_señales-DIRECTV.pdf",
+      "title": "Resolución 184/2026 - Bloqueo electrónico temporal de varios dominios denunciados",
+      "category": "",
+      "ext": "pdf",
+      "summary": "A raíz de una denuncia de DIRECTV de Uruguay por retransmisión no autorizada de las señales DSPORTS, Disney Junior, ESPN y ESPN2, dispone el bloqueo electrónico temporal de una quincena de sitios (entre ellos rojadirectaa.su, pirlotvhd.lat, tarjetarojahd.com.co y mundialenvivo.org) mediante requerimiento a los proveedores de acceso a internet, al amparo del art. 712 de la Ley 19.924 y su reglamentación por Decreto 345/022."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/187_2026-71-1-0000449-Permiso_anual-NTELSAT_US.pdf",
+      "filename": "187_2026-71-1-0000449-Permiso_anual-NTELSAT_US.pdf",
+      "title": "Resolución 187/2026 - Renovación permisos anuales a los satélites geoestacionarios detallados a continuación",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Renueva por un año, hasta el 30 de junio de 2027, el permiso del satélite geoestacionario IS-31 de la red de Intelsat US LLC (posición orbital 95,5° oeste) para prestar facilidades satelitales en el territorio nacional, tras verificarse que la empresa no comunicó intención de no renovar; fija un pago de USD 2.000 por el permiso."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/175_2021-71-1-0000677_decomiso_Jos%C3%A9_Santiago_Rivarola.pdf",
+      "filename": "175_2021-71-1-0000677_decomiso_José_Santiago_Rivarola.pdf",
+      "title": "Resolución 175/2026 - Decomiso definitivo de un transmisor artesanal de procedencia China",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Dispone el decomiso definitivo de un transmisor artesanal de origen chino de aproximadamente 15W, incautado a José Santiago Rivarola Machado por transmitir sin autorización en 96.3 MHz en Dolores (Soriano); en base a sus descargos —sin fines comerciales y sin antecedentes— se limita la sanción al decomiso y destrucción del equipo, sin multa."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/178_2022-71-1-0001122_sarandi_comunicaciones%20%281%29.pdf",
+      "filename": "178_2022-71-1-0001122_sarandi_comunicaciones (1).pdf",
+      "title": "Resolución 178/2026 - Autorización de cambio de nombre de fantasía a Sarandi Comunicaciones S.A",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Autoriza a Sarandí Comunicaciones S.A., permisionaria de CXD220 (91.9 MHz, Montevideo), a regularizar el cambio de nombre de fantasía de \"Radio Disney\" a \"FM Like\", que ya venía utilizando sin autorización previa; le aplica una sanción de observación por el cambio no autorizado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/159_2018-2-9-0000971-Inspecci%C3%B3n_TACUAREMB%C3%93_FM.pdf",
+      "filename": "159_2018-2-9-0000971-Inspección_TACUAREMBÓ_FM.pdf",
+      "title": "Resolución 159/2026 - Disponer la clausura definitiva de la emisora que operaba sin la debida autorización",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Dispone la clausura definitiva de una emisora no autorizada en 94.1 MHz en Tacuarembó y el decomiso definitivo del transmisor artesanal, responsabilizando a Walter Wagner Sosa Ballesteros, calificado como reincidente; lo intima a entregar el equipo en un plazo de diez días hábiles."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/148_2016-2-9-0001358-Deuda_Incobrable_-Ruben_Aguirre.pdf",
+      "filename": "148_2016-2-9-0001358-Deuda_Incobrable_-Ruben_Aguirre.pdf",
+      "title": "Resolución 148/2026 - Declarar incobrable la deuda a los efectos contables de Ruben Aguirre",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Declara incobrable a los efectos contables la deuda de 70 UR de Ruben Aguirre, correspondiente a la multa de 2020 por utilización no autorizada de la frecuencia 100.1 MHz en Tacuarembó, tras agotarse las gestiones de cobro; URSEC se reserva acciones para recuperar el transmisor artesanal aún no entregado."
+    },
+    {
+      "url": "https://www.gub.uy/unidad-reguladora-servicios-comunicaciones/sites/unidad-reguladora-servicios-comunicaciones/files/2026-08/149_2019-2-9-0000628_Sancion_ANC.pdf",
+      "filename": "149_2019-2-9-0000628_Sancion_ANC.pdf",
+      "title": "Resolución 149/2026 - Imponer a la Administración Nacional de Correos una sanción de apercibimiento",
+      "category": "",
+      "ext": "pdf",
+      "summary": "Impone una sanción de apercibimiento a la Administración Nacional de Correos (ANC) por incumplir la norma de entrega de 72 horas de una carta certificada nacional y por no responder a los requerimientos de información de URSEC en el trámite del reclamo."
+    }
+  ]
+}
